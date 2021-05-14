@@ -1,1 +1,25 @@
-<p>home works!</p>
+<div class="container-fluid">
+    <div class="row header">
+        <div class="col-3 logo">
+            <img src="../../../assets/img/logo.png" alt="Logo DWTube">
+        </div>
+        <div class="col"></div>
+        <div class="card col-2 text-right" *ngIf="convidat" routerLink="/login">
+            <img src="../../../assets/img/user.png" class="card-img-top" alt="Logo DWTube">
+            <div class="card-body">
+                <div>
+                    <a>Fes Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="card col-2 text-right" *ngIf="!convidat" routerLink="/login">
+            <img src="../../../assets/img/user.png" class="card-img-top" alt="Logo DWTube">
+            <div class="card-body">
+                <div>
+                    <a>Fes sadas</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
