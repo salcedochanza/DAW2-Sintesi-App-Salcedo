@@ -5,14 +5,22 @@
         </div>
         <div class="col mt-2 title">DWTube</div>
         <div class="col-1 text-right" *ngIf="convidat" routerLink="/login">
-            <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
+            <p>
+                Login
+            </p>
         </div>
 
         <div class="col-1 text-right" *ngIf="logged" (click)="goToPerfil()">
-            <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
+            <p>
+                <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
+                Perfil
+            </p>
         </div>
         <div class="col-1 text-right" *ngIf="logged" (click)="logout()">
-            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+            <p>
+                <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+                Logout
+            </p>
         </div>
     </div>
     <div class="row body mt-5">

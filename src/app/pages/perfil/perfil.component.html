@@ -5,38 +5,71 @@
             <img src="../../../assets/img/logo.png" alt="Logo DWTube">
         </div>
         <div class="col mt-2 title">DWTube</div>
-
         <div class="col-1 text-right" (click)="goToHome()">
-            <img src="../../../assets/img/home.png" class="card-img-top home" alt="Imatge usuari">
+            <p>
+                <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
+                Perfil
+            </p>
         </div>
         <div class="col-1 text-right" (click)="logout()">
-            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+            <p>
+                <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+                Logout
+            </p>
         </div>
     </div>
 
-    <!-- Table user info -->
-    <div class="col mt-3">
-        <div class="table-title">Dades Personals</div>
+    <div class="row">
+        <!-- Table user info -->
+        <div class="col-6 mt-3">
+            <div class="table-title">Dades Personals</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Cognoms</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{user.username}}</td>
+                        <td>{{user.first_name}}</td>
+                        <td>{{user.last_name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phone}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div (click)="editProfile()" class="btn btn-outline-dark" type="button">Edita el teu perfil</div>
+        </div>
+
+        <!-- Table info groups -->
+        <div class="col-6 mt-3">
+            <div class="table-title">Grups als que pertanys</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom del grup</th>
+                        <th scope="col">Descripció del grup</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let group of userGroups">
+                        <td class="table-group-name">{{group.name}}</td>
+                        <td>{{group.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Cognoms</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <td>{{user.username}}</td>
-            <td>{{user.first_name}}</td>
-            <td>{{user.last_name}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.phone}}</td>
-            </tr>
-        </tbody>
-    </table>
+
+    <!-- Llista Favorits -->
+    <div class="row mt-5">
+        <div class="table-title">Recursos als que estas subscrit</div>
+    </div>
+
 </div>
     

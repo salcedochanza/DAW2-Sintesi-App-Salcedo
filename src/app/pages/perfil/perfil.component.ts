@@ -42,4 +42,8 @@ export class PerfilComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  editProfile(){
+    this.router.navigate(['/perfil/edit']);
+  }
+
 }
