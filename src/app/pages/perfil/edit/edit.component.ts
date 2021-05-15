@@ -1,0 +1,60 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PerfilService } from 'src/app/services/perfil/perfil.service';
+
+@Component({
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss']
+})
+export class EditComponent implements OnInit {
+
+  public userId: String;
+  public user: String;
+  public firstName: String;
+  public lastName: String;
+  public email: String;
+  public phone: String;
+
+  constructor(private router: Router, private perfilService: PerfilService) {
+    this.checkUserLogged();
+  }
+
+  ngOnInit(): void {
+  }
+
+  checkUserLogged(){
+    let user = JSON.parse(localStorage.getItem('user'));
+    if (user == null){
+      this.router.navigate(['/login']);
+    } else {
+      this.getUserInfo();
+    }
+  }
+
+  getUserInfo(){
+    let userInfo = JSON.parse(localStorage.getItem('user'));
+
+    this.userId = userInfo.id;
+    this.user = userInfo.username;
+    this.firstName = userInfo.first_name;
+    this.lastName = userInfo.last_name;
+    this.email = userInfo.email;
+    this.phone = userInfo.phone;
+  }
+
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
+  goToPerfil(){
+    this.router.navigate(['/perfil']);
+  }
+
+  editProfile(){
+    let token = JSON.parse(localStorage.getItem('token'));
+    this.perfilService.editProfile(this.userId, this.user, this.firstName, this.lastName, this.email, this.phone, token);
+  }
+
+}
