@@ -1,25 +1,38 @@
 <div class="container-fluid">
     <div class="row header">
-        <div class="col-3 logo">
+        <div class="col-1 logo">
             <img src="../../../assets/img/logo.png" alt="Logo DWTube">
         </div>
         <div class="col"></div>
         <div class="card col-2 text-right" *ngIf="convidat" routerLink="/login">
-            <img src="../../../assets/img/user.png" class="card-img-top" alt="Logo DWTube">
+            <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
             <div class="card-body">
                 <div>
                     <a>Fes Login</a>
                 </div>
             </div>
         </div>
-        <div class="card col-2 text-right" *ngIf="!convidat" routerLink="/login">
-            <img src="../../../assets/img/user.png" class="card-img-top" alt="Logo DWTube">
+        <div class="card col-2 text-right" *ngIf="logged" (click)="logout()">
+            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
             <div class="card-body">
                 <div>
-                    <a>Fes sadas</a>
+                    <a>Fes logout</a>
                 </div>
             </div>
         </div>
         <div class="col-1"></div>
+    </div>
+    <div class="row body mt-5">
+        <div class="row search">
+            <div class="input-group flex-nowrap">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><img src="../../../assets/img/loupe.png" alt="Lupa" class="lupa"></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Text a buscar en TITOL">
+              </div>
+        </div>
+        <div class="row categories">
+
+        </div>
     </div>
 </div>

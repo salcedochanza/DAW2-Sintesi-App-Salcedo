@@ -7,16 +7,28 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
-  checkLogin(user: String, pass: String){
+  Login(user: String, pass: String){
     console.log(user, pass);
     let options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}),
-      observe: 'response' as 'response'
+      observe: 'body' as 'body'
     };
+
     this.http.post("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/login", { 'user':user , 'pass':pass}, options).subscribe(
-      (response: any) => { console.log(response) }
+      (body: any) => { 
+        console.log(body);
+        if (body.status){
+          localStorage.setItem('token', JSON.stringify(body.token));
+          localStorage.setItem('user', JSON.stringify(body.user));
+          localStorage.setItem('userGroup', JSON.stringify(body.userGroup));
+          this.router.navigate(['/home']);
+        } else {
+          alert("El usuari o contrasenya no son correctes");
+        }
+      }
     );
   }
 

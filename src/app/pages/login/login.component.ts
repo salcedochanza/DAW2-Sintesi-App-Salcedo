@@ -8,8 +8,8 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  private user: String="admin";
-  private pass: String="password";
+  public user: String;
+  public pass: String;
   
 
   constructor(private loginService: LoginService) { }
@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.user, this.pass);
-    this.loginService.checkLogin(this.user, this.pass);
+    this.loginService.Login(this.user, this.pass);
   }
 
 }
