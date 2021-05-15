@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row header">
+        <div class="col-1 logo">
+            <img src="../../../assets/img/logo.png" alt="Logo DWTube">
+        </div>
+        <div class="col mt-2 title">DWTube</div>
+
+        <div class="col-1 text-right" (click)="goToHome()">
+            <img src="../../../assets/img/home.png" class="card-img-top home" alt="Imatge usuari">
+        </div>
+        <div class="col-1 text-right" (click)="logout()">
+            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+        </div>
+    </div>
+
+    <!-- Table user info -->
+    <div class="col mt-3">
+        <div class="table-title">Dades Personals</div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Cognoms</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>{{user.username}}</td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    
