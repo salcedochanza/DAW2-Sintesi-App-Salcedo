@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoriesService } from 'src/app/services/categories/categories.service';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +11,13 @@ export class HomeComponent implements OnInit {
 
   public convidat: boolean = true;
   public logged: boolean;
+  public rol: string;
+  public categories: any = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private categoriesService: CategoriesService) {
     this.checkUserLogged();
+    this.categories = this.categoriesService.getCategories(0);
+    console.log(this.categories);
   }
 
   ngOnInit(): void {
@@ -20,9 +25,12 @@ export class HomeComponent implements OnInit {
 
   checkUserLogged(){
     let user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
     if (user != null){
       this.logged = true;
       this.convidat = false;
+
+      this.rol = user.rol;
     }
   }
 

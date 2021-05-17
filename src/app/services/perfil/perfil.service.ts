@@ -26,7 +26,6 @@ export class PerfilService {
       
       this.http.put("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/profile/edit", body, options).subscribe(
         (body: any) => {
-          console.log(body.status);
           if (body.status){
             localStorage.setItem('token', JSON.stringify(body.token));
             localStorage.setItem('user', JSON.stringify(body.user));

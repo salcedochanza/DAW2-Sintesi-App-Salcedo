@@ -1,40 +1,49 @@
-<div class="container-fluid">
-    <div class="row header">
-        <div class="col-1 logo">
-            <img src="../../../assets/img/logo.png" alt="Logo DWTube">
-        </div>
-        <div class="col mt-2 title">DWTube</div>
-        <div class="col-1 text-right" *ngIf="convidat" routerLink="/login">
-            <p>
-                <img src="../../../assets/img/login.png" class="card-img-top" alt="Imatge login">
-                Login
-            </p>
-        </div>
-
-        <div class="col-1 text-right" *ngIf="logged" (click)="goToPerfil()">
-            <p>
-                <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
-                Perfil
-            </p>
-        </div>
-        <div class="col-1 text-right" *ngIf="logged" (click)="logout()">
-            <p>
-                <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
-                Logout
-            </p>
-        </div>
+<div class="row header">
+    <div class="col-1 logo">
+        <img src="../../../assets/img/logo.png" alt="Logo DWTube">
     </div>
-    <div class="row body mt-5">
-        <div class="row search">
-            <div class="input-group flex-nowrap">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><img src="../../../assets/img/loupe.png" alt="Lupa" class="lupa"></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Text a buscar en TITOL">
-              </div>
-        </div>
-        <div class="row categories">
-            
-        </div>
+    <div class="col mt-2 title">DWTube</div>
+    <div class="col-1 text-right" *ngIf="convidat" routerLink="/login">
+        <p>
+            <img src="../../../assets/img/login.png" class="card-img-top" alt="Imatge login">
+            Login
+        </p>
+    </div>
+
+    <div class="col-1 text-right" *ngIf="rol=='admin'" routerLink="/admin">
+        <p>
+            <img src="../../../assets/img/admin.png" class="card-img-top" alt="Imatge usuari">
+            Administra
+        </p>
+    </div>
+    <div class="col-1 text-right" *ngIf="rol=='profe'">
+        <p>
+            <img src="../../../assets/img/add.png" class="card-img-top" alt="Imatge usuari">
+            Nou Recurs
+        </p>
+    </div>
+    <div class="col-1 text-right" *ngIf="logged" (click)="goToPerfil()">
+        <p>
+            <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
+            Perfil
+        </p>
+    </div>
+    <div class="col-1 text-right" *ngIf="logged" (click)="logout()">
+        <p>
+            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+            Logout
+        </p>
+    </div>
+</div>
+<div class="row body mt-5">
+    <div class="row search">
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><img src="../../../assets/img/loupe.png" alt="Lupa" class="lupa"></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Text a buscar en TITOL">
+            </div>
+    </div>
+    <div class="row categories">
     </div>
 </div>
