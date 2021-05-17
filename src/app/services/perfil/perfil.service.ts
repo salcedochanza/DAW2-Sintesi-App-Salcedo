@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -19,12 +19,22 @@ export class PerfilService {
         'email':email,
         'phone':phone,
       };
-      let headers = {
-        'Authorization': 'Bearer ' + token,
-      }
-      console.log(body);
-      this.http.put("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/profile_edit", body, {headers}).subscribe(
-
+      let options = {
+        headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}),
+        observe: 'body' as 'body'
+      };
+      
+      this.http.put("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/profile/edit", body, options).subscribe(
+        (body: any) => {
+          console.log(body.status);
+          if (body.status){
+            localStorage.setItem('token', JSON.stringify(body.token));
+            localStorage.setItem('user', JSON.stringify(body.user));
+            this.router.navigate(['/perfil']);
+          } else {
+            alert("El usuari o contrasenya no son correctes");
+          }
+        }
       );
     }
   }
