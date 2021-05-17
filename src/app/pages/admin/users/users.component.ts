@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-users',
@@ -9,9 +11,20 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit {
 
   public user;
+  private _users: User[];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private usersService: UsersService) {
     this.checkUserLogged();
+    this.usersService.getUsers();
+    this.usersService.users.subscribe(
+      (originalUser: User[]) => {
+        this._users = originalUser;
+      }
+    );
+  }
+
+  get users(): User[] {
+    return this._users;
   }
 
   ngOnInit(): void {
