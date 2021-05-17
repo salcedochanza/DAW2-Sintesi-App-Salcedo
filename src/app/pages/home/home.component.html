@@ -12,13 +12,13 @@
 
     <div class="col-1 text-right" *ngIf="rol=='admin'" routerLink="/admin">
         <p>
-            <img src="../../../assets/img/admin.png" class="card-img-top" alt="Imatge usuari">
+            <img src="../../../assets/img/admin.png" class="card-img-top" alt="Imatge administra">
             Administra
         </p>
     </div>
     <div class="col-1 text-right" *ngIf="rol=='profe'">
         <p>
-            <img src="../../../assets/img/add.png" class="card-img-top" alt="Imatge usuari">
+            <img src="../../../assets/img/add.png" class="card-img-top" alt="Imatge nou recurs">
             Nou Recurs
         </p>
     </div>
@@ -45,5 +45,8 @@
             </div>
     </div>
     <div class="row categories">
+        <div *ngFor="let category of categories">
+            {{ category.name }}
+        </div>
     </div>
 </div>

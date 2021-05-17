@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
 
 @Component({
@@ -12,15 +13,24 @@ export class HomeComponent implements OnInit {
   public convidat: boolean = true;
   public logged: boolean;
   public rol: string;
-  public categories: any = [];
+  private _categories: Category[];
 
   constructor(private router: Router, private categoriesService: CategoriesService) {
     this.checkUserLogged();
-    this.categories = this.categoriesService.getCategories(0);
-    console.log(this.categories);
+    this.categoriesService.getCategories(0);
+
+    this.categoriesService.categories.subscribe(
+      (originalCategory: Category[]) => {
+        this._categories = originalCategory;
+      }
+    );
   }
 
   ngOnInit(): void {
+  }
+
+  get categories(): Category[] {
+    return this._categories;
   }
 
   checkUserLogged(){
