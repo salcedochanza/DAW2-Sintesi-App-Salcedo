@@ -12,25 +12,26 @@ export class CategoriesService {
     let options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + parent, options).subscribe(
-      (response: any) => {
-        console.log(response);
+    return this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + parent, options);
+    // .subscribe(
+    //   (response: any) => {
+    //     console.log(response);
 
-        response.forEach(
-          (category:any) => {
-            this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + category.id).subscribe(
-              (response:any) => {
-                console.log(response);
-                console.log(response.length);
-                if (response.length > 0){
-                  //this.getCategories(response.id);
-                }
-              }
-            );
-          }
-        );
-        
-      }
-    );
+    //     response.forEach(
+    //       (category:any) => {
+    //         this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + category.id).subscribe(
+    //           (response:any) => {
+    //             console.log(response);
+    //             console.log(response.length);
+    //             if (response.length > 0){
+    //               //this.getCategories(response.id);
+    //             }
+    //           }
+    //         );
+    //       }
+    //     );
+
+    //   }
+    // );
   }
 }

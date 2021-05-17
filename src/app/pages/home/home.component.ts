@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
 
   checkUserLogged(){
     let user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     if (user != null){
       this.logged = true;
       this.convidat = false;
