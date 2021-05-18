@@ -10,15 +10,17 @@ export class PerfilService {
   constructor(private http: HttpClient,
     private router: Router) { }
 
-    editProfile(userId: String, user: String, firstName: String, lastName: String, email: String, phone: String, token: String) {
+    editProfile(userId: string, user: string, password: string, firstName: string, lastName: string, email: string, phone: string, token: string) {
       let body = {
         'id': userId,
         'user': user,
+        'password': password,
         'firstName':firstName,
         'lastName':lastName,
         'email':email,
         'phone':phone,
       };
+      console.log(body);
       let options = {
         headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}),
         observe: 'body' as 'body'

@@ -9,12 +9,13 @@ import { PerfilService } from 'src/app/services/perfil/perfil.service';
 })
 export class EditComponent implements OnInit {
 
-  public userId: String;
-  public user: String;
-  public firstName: String;
-  public lastName: String;
-  public email: String;
-  public phone: String;
+  public userId: string;
+  public user: string;
+  public password: string;
+  public firstName: string;
+  public lastName: string;
+  public email: string;
+  public phone: string;
 
   constructor(private router: Router, private perfilService: PerfilService) {
     this.checkUserLogged();
@@ -54,7 +55,7 @@ export class EditComponent implements OnInit {
 
   editProfile(){
     let token = JSON.parse(localStorage.getItem('token'));
-    this.perfilService.editProfile(this.userId, this.user, this.firstName, this.lastName, this.email, this.phone, token);
+    this.perfilService.editProfile(this.userId, this.user, this.password, this.firstName, this.lastName, this.email, this.phone, token);
   }
 
 }

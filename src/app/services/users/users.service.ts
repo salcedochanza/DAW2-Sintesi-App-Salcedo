@@ -10,16 +10,25 @@ import { User } from 'src/app/models/user';
 })
 export class UsersService {
 
-  private _user: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  private _users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
   constructor(private http: HttpClient, private router: Router) { }
 
   get users(): Observable<User[]> {
-    return this._user.asObservable();
+    return this._users.asObservable();
+  }
+
+  getUser(id: string){
+    let token = JSON.parse(localStorage.getItem('token'));
+    let options = {
+      headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}),
+      observe: 'body' as 'body'
+    };
+    return this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/user?id=" + id, options);
   }
 
   getUsers(){
-    this._user.next([]);
+    this._users.next([]);
     let token = JSON.parse(localStorage.getItem('token'));
     let options = {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}),
@@ -43,11 +52,40 @@ export class UsersService {
 
             this.users.pipe(take(1)).subscribe(
               (originalUser: User[]) => {
-                this._user.next(originalUser.concat(users));
+                this._users.next(originalUser.concat(users));
               }
             );
         });
         localStorage.setItem('token', JSON.stringify(response.token));
+      },(error: any) => {
+        localStorage.setItem('token', JSON.stringify(error.error.token));
+      }
+    );
+  }
+
+  edit(id: string, user: string, password: string, firstName: string, lastName: string, email: string, phone: string, token: string) {
+    console.log(id);
+    let body = {
+      'user': user,
+      'id': id,
+      'password': password,
+      'firstName':firstName,
+      'lastName':lastName,
+      'email':email,
+      'phone':phone,
+    };
+    console.log(body);
+    let options = {
+      headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'})
+    };
+    
+    this.http.put("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/user", body, options).subscribe(
+      (body: any) => {
+        localStorage.setItem('token', JSON.stringify(body.token));
+        this.router.navigate(['/admin/users']);
+      }, (error: any) => {
+        localStorage.setItem('token', JSON.stringify(error.error.token));
+        alert(error.error.message);
       }
     );
   }

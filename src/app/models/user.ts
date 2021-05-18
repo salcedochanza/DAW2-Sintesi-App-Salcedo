@@ -1,6 +1,7 @@
 export class User {
     private _userId: string;
     private _username: string;
+    private _password: string;
     private _email: string;
     private _firstName: string;
     private _lastName: string;
@@ -13,6 +14,9 @@ export class User {
     }
     get username(): string {
         return this._username;
+    }
+    get password(): string {
+        return this._password;
     }
     get email(): string {
         return this._email;
@@ -32,6 +36,9 @@ export class User {
     }
     set username(username:string){
         this._username = username;
+    }
+    set password(password:string){
+        this._password = password;
     }
     set email(email:string){
         this._email = email;
