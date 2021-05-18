@@ -17,7 +17,7 @@ export class LoginService {
     };
 
     this.http.post("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/login", { 'user':user , 'pass':pass}, options).subscribe(
-      (body: any) => { 
+      (body: any) => {
         if (body.status){
           localStorage.setItem('token', JSON.stringify(body.token));
           localStorage.setItem('user', JSON.stringify(body.user));

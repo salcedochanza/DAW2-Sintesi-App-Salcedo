@@ -11,6 +11,9 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { EditComponent } from './pages/perfil/edit/edit.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { UsersComponent } from './pages/admin/users/users.component';
+import { ViewComponent } from './pages/admin/users/view/view.component';
+import { UpdateComponent } from './pages/admin/users/update/update.component';
+import { DeleteComponent } from './pages/admin/users/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { UsersComponent } from './pages/admin/users/users.component';
     PerfilComponent,
     EditComponent,
     AdminComponent,
-    UsersComponent
+    UsersComponent,
+    ViewComponent,
+    UpdateComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
