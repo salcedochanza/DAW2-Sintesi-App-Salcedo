@@ -31,7 +31,6 @@
                     <th scope="col">Cognoms</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">View</th>
                     <th scope="col">Update</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -43,7 +42,6 @@
                     <td>{{user.lastName}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.phone}}</td>
-                    <td><button class="btn form-control" [routerLink]="['/admin/users/view', user.userId]">View</button></td>
                     <td><button class="btn form-control" [routerLink]="['/admin/users/update', user.userId]">Update</button></td>
                     <td><button class="btn form-control" [routerLink]="['/admin/users/delete', user.userId]">Delete</button></td>
                 </tr>

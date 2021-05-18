@@ -20,43 +20,57 @@ export class CategoriesService {
 
   getCategories(parent: number){
     this._category.next([]);
-    let options = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + parent, options).subscribe(
+    this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + parent).subscribe(
       (response: any) => {
         response.forEach(
           (category:any) => {
-            this.a(category);
-        });
+            console.log(category);
+            this.getCategories(category.id);
+          }
+        )
       }
-    );
+    )
   }
 
-  a(category:any){
-    let categorys: Category = new Category();
-    categorys.id = category.id;
-    categorys.name = category.name;
-    categorys.parentId = category.parent_id;
+  // getCategories(parent: number){
+  //   this._category.next([]);
+  //   let options = {
+  //     headers: new HttpHeaders({'Content-Type': 'application/json'})
+  //   };
+  //   this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + parent, options).subscribe(
+  //     (response: any) => {
+  //       response.forEach(
+  //         (category:any) => {
+  //           this.a(category);
+  //       });
+  //     }
+  //   );
+  // }
+
+  // a(category:any){
+  //   let categorys: Category = new Category();
+  //   categorys.id = category.id;
+  //   categorys.name = category.name;
+  //   categorys.parentId = category.parent_id;
     
-    this.categories.pipe(take(1)).subscribe(
-      (originalCategory: Category[]) => {
-        this._category.next(originalCategory.concat(categorys));
-      }
-    );
+  //   this.categories.pipe(take(1)).subscribe(
+  //     (originalCategory: Category[]) => {
+  //       this._category.next(originalCategory.concat(categorys));
+  //     }
+  //   );
     
-    if(category?.id != null) {
-      this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + category.id).subscribe(
-        (response:any) => {
-          if (response.length > 0){
-            response.forEach(
-              (category:any) => {
-                this.a(category);
-            });
-          }
-        }
-      );
-    }
-  }
+  //   if(category?.id != null) {
+  //     this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + category.id).subscribe(
+  //       (response:any) => {
+  //         if (response.length > 0){
+  //           response.forEach(
+  //             (category:any) => {
+  //               this.a(category);
+  //           });
+  //         }
+  //       }
+  //     );
+  //   }
+  // }
 }
 

@@ -11,10 +11,13 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { EditComponent } from './pages/perfil/edit/edit.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { UsersComponent } from './pages/admin/users/users.component';
-import { ViewComponent } from './pages/admin/users/view/view.component';
 import { UpdateComponent } from './pages/admin/users/update/update.component';
 import { DeleteComponent } from './pages/admin/users/delete/delete.component';
 import { CreateComponent } from './pages/admin/users/create/create.component';
+import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.component';
+import { GroupsCreateComponent } from './pages/admin/admin-groups/groups-create/groups-create.component';
+import { GroupsUpdateComponent } from './pages/admin/admin-groups/groups-update/groups-update.component';
+import { GroupsDeleteComponent } from './pages/admin/admin-groups/groups-delete/groups-delete.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +28,13 @@ import { CreateComponent } from './pages/admin/users/create/create.component';
     EditComponent,
     AdminComponent,
     UsersComponent,
-    ViewComponent,
     UpdateComponent,
     DeleteComponent,
-    CreateComponent
+    CreateComponent,
+    AdminGroupsComponent,
+    GroupsCreateComponent,
+    GroupsUpdateComponent,
+    GroupsDeleteComponent
   ],
   imports: [
     BrowserModule,
