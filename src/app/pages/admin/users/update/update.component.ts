@@ -8,12 +8,13 @@ import { Router } from '@angular/router';
 })
 export class UpdateComponent implements OnInit {
 
-  public userId: String;
-  public user: String;
-  public firstName: String;
-  public lastName: String;
-  public email: String;
-  public phone: String;
+  public userId: string;
+  public password: string;
+  public user: string;
+  public firstName: string;
+  public lastName: string;
+  public email: string;
+  public phone: string;
 
   constructor(private router: Router) { }
 

@@ -19,6 +19,7 @@ export class CategoriesService {
   }
 
   getCategories(parent: number){
+    this._category.next([]);
     let options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
@@ -43,9 +44,7 @@ export class CategoriesService {
         this._category.next(originalCategory.concat(categorys));
       }
     );
-
-
-    console.log(category);
+    
     if(category?.id != null) {
       this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/categories?parent=" + category.id).subscribe(
         (response:any) => {

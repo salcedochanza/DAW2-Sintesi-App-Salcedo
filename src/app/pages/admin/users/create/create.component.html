@@ -4,10 +4,10 @@
         <img src="../../../assets/img/logo.png" alt="Logo DWTube">
     </div>
     <div class="col mt-2 title">DWTube</div>
-    <div class="col-1 text-right" (click)="goToPerfil()">
+    <div class="col-1 text-right" (click)="goToHome()">
         <p>
-            <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
-            Perfil
+            <img src="../../../assets/img/home.png" class="card-img-top" alt="Imatge usuari">
+            Inici
         </p>
     </div>
     <div class="col-1 text-right" (click)="logout()">
@@ -19,10 +19,18 @@
 </div>
 
 <!-- Formulari -->
-<div class="p-3 col-5">
+<div class="p-3 col-5 formulari">
     <div class="form-group p-0">
-        <label for="user">Username</label>
-        <input type="text" name="user" class="form-control" [(ngModel)]="user"/>
+        <label for="username">Nom d'usuari</label>
+        <input type="text" name="username" class="form-control" [(ngModel)]="user"/>
+    </div>
+    <div class="form-group p-0">
+        <label for="password">Contrasenya</label>
+        <input type="password" name="password" class="form-control" [(ngModel)]="password"/>
+    </div>
+    <div class="form-group p-0">
+        <label for="password2">Repeteix la contrasenya</label>
+        <input type="password" name="password2" class="form-control" [(ngModel)]="password2"/>
     </div>
     <div class="form-group p-0">
         <label for="firstName">Nom</label>
@@ -34,13 +42,13 @@
     </div>
     <div class="form-group p-0">
         <label for="email">Email</label>
-        <input type="email" name="email" class="form-control" [(ngModel)]="email"/>
+        <input type="text" name="email" class="form-control" [(ngModel)]="email"/>
     </div>
     <div class="form-group p-0">
         <label for="phone">Número de movil</label>
-        <input type="tel" name="phone" class="form-control" [(ngModel)]="phone"/>
+        <input type="text" name="phone" class="form-control" [(ngModel)]="phone"/>
     </div>
     <div class="form-group mt-2">
-        <button type="submit" class="btn btn-primary form-control" (click)="editProfile()">Fer canvis</button>
+        <button type="submit" class="btn btn-primary form-control" (click)="newUser()">Crear usuari</button>
     </div>
 </div>

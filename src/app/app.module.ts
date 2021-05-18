@@ -14,6 +14,7 @@ import { UsersComponent } from './pages/admin/users/users.component';
 import { ViewComponent } from './pages/admin/users/view/view.component';
 import { UpdateComponent } from './pages/admin/users/update/update.component';
 import { DeleteComponent } from './pages/admin/users/delete/delete.component';
+import { CreateComponent } from './pages/admin/users/create/create.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DeleteComponent } from './pages/admin/users/delete/delete.component';
     UsersComponent,
     ViewComponent,
     UpdateComponent,
-    DeleteComponent
+    DeleteComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,
