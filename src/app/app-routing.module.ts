@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminCategoriesComponent } from './pages/admin/admin-categories/admin-categories.component';
+import { CategoriesCreateComponent } from './pages/admin/admin-categories/categories-create/categories-create.component';
+import { CategoriesDeleteComponent } from './pages/admin/admin-categories/categories-delete/categories-delete.component';
+import { CategoriesUpdateComponent } from './pages/admin/admin-categories/categories-update/categories-update.component';
 import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.component';
 import { GroupsCreateComponent } from './pages/admin/admin-groups/groups-create/groups-create.component';
 import { GroupsDeleteComponent } from './pages/admin/admin-groups/groups-delete/groups-delete.component';
@@ -29,6 +33,10 @@ const routes: Routes = [
   {path: 'admin/groups/create', component: GroupsCreateComponent},
   {path: 'admin/groups/update/:id', component: GroupsUpdateComponent},
   {path: 'admin/groups/delete/:id', component: GroupsDeleteComponent},
+  {path: 'admin/categories', component: AdminCategoriesComponent},
+  {path: 'admin/categories/create', component: CategoriesCreateComponent},
+  {path: 'admin/categories/update/:id', component: CategoriesUpdateComponent},
+  {path: 'admin/categories/delete/:id', component: CategoriesDeleteComponent},
 ];
 
 @NgModule({

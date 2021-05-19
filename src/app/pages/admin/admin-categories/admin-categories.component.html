@@ -1,0 +1,46 @@
+<!-- Header -->
+<div class="row header">
+    <div class="col-1 logo">
+        <img src="../../../assets/img/logo.png" alt="Logo DWTube">
+    </div>
+    <div class="col mt-2 title">DWTube</div>
+    <div class="col-1 text-right" (click)="goToHome()">
+        <p>
+            <img src="../../../assets/img/home.png" class="card-img-top" alt="Imatge usuari">
+            Inici
+        </p>
+    </div>
+    <div class="col-1 text-right" (click)="logout()">
+        <p>
+            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+            Logout
+        </p>
+    </div>
+</div>
+
+<!-- Body -->
+
+<div class="row">
+    <div class="taula-users">
+        <div class="table-title">Dades Grups</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Id Pare</th>
+                    <th scope="col">Modifica</th>
+                    <th scope="col">Elimina</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories">
+                    <td>{{category.name}}</td>
+                    <td>{{category.parentId}}</td>
+                    <td><button class="btn form-control" [routerLink]="['/admin/categories/update', category.id]">Update</button></td>
+                    <td><button class="btn form-control" [routerLink]="['/admin/categories/delete', category.id]">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-lg form-control mt-2" [routerLink]="['/admin/categories/create']">Crear nova categoria</button>
+    </div>
+</div>

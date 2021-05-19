@@ -18,6 +18,10 @@ import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.co
 import { GroupsCreateComponent } from './pages/admin/admin-groups/groups-create/groups-create.component';
 import { GroupsUpdateComponent } from './pages/admin/admin-groups/groups-update/groups-update.component';
 import { GroupsDeleteComponent } from './pages/admin/admin-groups/groups-delete/groups-delete.component';
+import { AdminCategoriesComponent } from './pages/admin/admin-categories/admin-categories.component';
+import { CategoriesCreateComponent } from './pages/admin/admin-categories/categories-create/categories-create.component';
+import { CategoriesUpdateComponent } from './pages/admin/admin-categories/categories-update/categories-update.component';
+import { CategoriesDeleteComponent } from './pages/admin/admin-categories/categories-delete/categories-delete.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { GroupsDeleteComponent } from './pages/admin/admin-groups/groups-delete/
     AdminGroupsComponent,
     GroupsCreateComponent,
     GroupsUpdateComponent,
-    GroupsDeleteComponent
+    GroupsDeleteComponent,
+    AdminCategoriesComponent,
+    CategoriesCreateComponent,
+    CategoriesUpdateComponent,
+    CategoriesDeleteComponent
   ],
   imports: [
     BrowserModule,

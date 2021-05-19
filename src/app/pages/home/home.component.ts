@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router, private categoriesService: CategoriesService) {
     this.checkUserLogged();
-    this.categoriesService.getCategories(0);
+    this.categoriesService.getFills(0);
 
     this.categoriesService.categories.subscribe(
       (originalCategory: Category[]) => {
