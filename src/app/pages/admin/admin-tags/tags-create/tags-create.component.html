@@ -1,0 +1,30 @@
+<!-- Header -->
+<div class="row header">
+    <div class="col-1 logo">
+        <img src="../../../assets/img/logo.png" alt="Logo DWTube">
+    </div>
+    <div class="col mt-2 title">DWTube</div>
+    <div class="col-1 text-right" (click)="goToHome()">
+        <p>
+            <img src="../../../assets/img/home.png" class="card-img-top" alt="Imatge usuari">
+            Inici
+        </p>
+    </div>
+    <div class="col-1 text-right" (click)="logout()">
+        <p>
+            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+            Logout
+        </p>
+    </div>
+</div>
+
+<!-- Formulari -->
+<div class="p-3 col-5 formulari">
+    <div class="form-group p-0">
+        <label for="name">Nom del grup</label>
+        <input type="text" name="name" class="form-control" [(ngModel)]="name"/>
+    </div>
+    <div class="form-group mt-2">
+        <button type="submit" class="btn btn-primary form-control" (click)="newTag()">Crear grup</button>
+    </div>
+</div>

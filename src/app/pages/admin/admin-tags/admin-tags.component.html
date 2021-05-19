@@ -1,0 +1,44 @@
+<!-- Header -->
+<div class="row header">
+    <div class="col-1 logo">
+        <img src="../../../assets/img/logo.png" alt="Logo DWTube">
+    </div>
+    <div class="col mt-2 title">DWTube</div>
+    <div class="col-1 text-right" (click)="goToHome()">
+        <p>
+            <img src="../../../assets/img/home.png" class="card-img-top" alt="Imatge usuari">
+            Inici
+        </p>
+    </div>
+    <div class="col-1 text-right" (click)="logout()">
+        <p>
+            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+            Logout
+        </p>
+    </div>
+</div>
+
+<!-- Body -->
+
+<div class="row">
+    <div class="taula-users">
+        <div class="table-title">Dades Tags</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Modifica</th>
+                    <th scope="col">Elimina</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tag of tags">
+                    <td>{{tag.name}}</td>
+                    <td><button class="btn form-control" [routerLink]="['/admin/tags/update', tag.id]">Update</button></td>
+                    <td><button class="btn form-control" [routerLink]="['/admin/tags/delete', tag.id]">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-lg form-control mt-2" [routerLink]="['/admin/tags/create']">Crear nou grup</button>
+    </div>
+</div>

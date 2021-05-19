@@ -22,6 +22,10 @@ import { AdminCategoriesComponent } from './pages/admin/admin-categories/admin-c
 import { CategoriesCreateComponent } from './pages/admin/admin-categories/categories-create/categories-create.component';
 import { CategoriesUpdateComponent } from './pages/admin/admin-categories/categories-update/categories-update.component';
 import { CategoriesDeleteComponent } from './pages/admin/admin-categories/categories-delete/categories-delete.component';
+import { AdminTagsComponent } from './pages/admin/admin-tags/admin-tags.component';
+import { TagsCreateComponent } from './pages/admin/admin-tags/tags-create/tags-create.component';
+import { TagsDeleteComponent } from './pages/admin/admin-tags/tags-delete/tags-delete.component';
+import { TagsUpdateComponent } from './pages/admin/admin-tags/tags-update/tags-update.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,11 @@ import { CategoriesDeleteComponent } from './pages/admin/admin-categories/catego
     AdminCategoriesComponent,
     CategoriesCreateComponent,
     CategoriesUpdateComponent,
-    CategoriesDeleteComponent
+    CategoriesDeleteComponent,
+    AdminTagsComponent,
+    TagsCreateComponent,
+    TagsDeleteComponent,
+    TagsUpdateComponent
   ],
   imports: [
     BrowserModule,

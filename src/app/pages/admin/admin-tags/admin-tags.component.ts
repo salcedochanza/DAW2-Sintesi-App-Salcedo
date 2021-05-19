@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/models/category';
-import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { Tag } from 'src/app/models/tag';
+import { TagsService } from 'src/app/services/tags/tags.service';
 
 @Component({
-  selector: 'app-admin-categories',
-  templateUrl: './admin-categories.component.html',
-  styleUrls: ['./admin-categories.component.scss']
+  selector: 'app-admin-tags',
+  templateUrl: './admin-tags.component.html',
+  styleUrls: ['./admin-tags.component.scss']
 })
-export class AdminCategoriesComponent implements OnInit {
+export class AdminTagsComponent implements OnInit {
 
   public user;
-  private _categories: Category[];
+  private _tags: Tag[];
 
-  constructor(private router: Router, private categoryService: CategoriesService) {
+  constructor(private router: Router, private tagService: TagsService) {
     this.checkUserLogged();
-    this.categoryService.getCategories();
-    this.categoryService.categories.subscribe(
-      (originalCategory: Category[]) => {
-        this._categories = originalCategory;
+    this.tagService.getTags();
+    this.tagService.tags.subscribe(
+      (originalTags: Tag[]) => {
+        this._tags = originalTags;
       }
     );
   }
 
-  get categories(): Category[] {
-    return this._categories;
+  get tags(): Tag[] {
+    return this._tags;
   }
 
   ngOnInit(): void {

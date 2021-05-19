@@ -8,6 +8,10 @@ import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.co
 import { GroupsCreateComponent } from './pages/admin/admin-groups/groups-create/groups-create.component';
 import { GroupsDeleteComponent } from './pages/admin/admin-groups/groups-delete/groups-delete.component';
 import { GroupsUpdateComponent } from './pages/admin/admin-groups/groups-update/groups-update.component';
+import { AdminTagsComponent } from './pages/admin/admin-tags/admin-tags.component';
+import { TagsCreateComponent } from './pages/admin/admin-tags/tags-create/tags-create.component';
+import { TagsDeleteComponent } from './pages/admin/admin-tags/tags-delete/tags-delete.component';
+import { TagsUpdateComponent } from './pages/admin/admin-tags/tags-update/tags-update.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { CreateComponent } from './pages/admin/users/create/create.component';
 import { DeleteComponent } from './pages/admin/users/delete/delete.component';
@@ -25,18 +29,26 @@ const routes: Routes = [
   {path: 'perfil', component: PerfilComponent},
   {path: 'perfil/edit', component: EditComponent},
   {path: 'admin', component: AdminComponent},
+
   {path: 'admin/users', component: UsersComponent},
   {path: 'admin/users/update/:id', component: UpdateComponent},
   {path: 'admin/users/delete/:id', component: DeleteComponent},
   {path: 'admin/users/create', component: CreateComponent},
+
   {path: 'admin/groups', component: AdminGroupsComponent},
   {path: 'admin/groups/create', component: GroupsCreateComponent},
   {path: 'admin/groups/update/:id', component: GroupsUpdateComponent},
   {path: 'admin/groups/delete/:id', component: GroupsDeleteComponent},
+
   {path: 'admin/categories', component: AdminCategoriesComponent},
   {path: 'admin/categories/create', component: CategoriesCreateComponent},
   {path: 'admin/categories/update/:id', component: CategoriesUpdateComponent},
   {path: 'admin/categories/delete/:id', component: CategoriesDeleteComponent},
+  
+  {path: 'admin/tags', component: AdminTagsComponent},
+  {path: 'admin/tags/create', component: TagsCreateComponent},
+  {path: 'admin/tags/update/:id', component: TagsUpdateComponent},
+  {path: 'admin/tags/delete/:id', component: TagsDeleteComponent},
 ];
 
 @NgModule({
