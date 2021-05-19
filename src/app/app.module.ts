@@ -26,6 +26,10 @@ import { AdminTagsComponent } from './pages/admin/admin-tags/admin-tags.componen
 import { TagsCreateComponent } from './pages/admin/admin-tags/tags-create/tags-create.component';
 import { TagsDeleteComponent } from './pages/admin/admin-tags/tags-delete/tags-delete.component';
 import { TagsUpdateComponent } from './pages/admin/admin-tags/tags-update/tags-update.component';
+import { AdminRecursosComponent } from './pages/admin/admin-recursos/admin-recursos.component';
+import { RecursosCreateComponent } from './pages/admin/admin-recursos/recursos-create/recursos-create.component';
+import { RecursosDeleteComponent } from './pages/admin/admin-recursos/recursos-delete/recursos-delete.component';
+import { RecursosUpdateComponent } from './pages/admin/admin-recursos/recursos-update/recursos-update.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { TagsUpdateComponent } from './pages/admin/admin-tags/tags-update/tags-u
     AdminTagsComponent,
     TagsCreateComponent,
     TagsDeleteComponent,
-    TagsUpdateComponent
+    TagsUpdateComponent,
+    AdminRecursosComponent,
+    RecursosCreateComponent,
+    RecursosDeleteComponent,
+    RecursosUpdateComponent
   ],
   imports: [
     BrowserModule,

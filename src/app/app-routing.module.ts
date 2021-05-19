@@ -8,6 +8,10 @@ import { AdminGroupsComponent } from './pages/admin/admin-groups/admin-groups.co
 import { GroupsCreateComponent } from './pages/admin/admin-groups/groups-create/groups-create.component';
 import { GroupsDeleteComponent } from './pages/admin/admin-groups/groups-delete/groups-delete.component';
 import { GroupsUpdateComponent } from './pages/admin/admin-groups/groups-update/groups-update.component';
+import { AdminRecursosComponent } from './pages/admin/admin-recursos/admin-recursos.component';
+import { RecursosCreateComponent } from './pages/admin/admin-recursos/recursos-create/recursos-create.component';
+import { RecursosDeleteComponent } from './pages/admin/admin-recursos/recursos-delete/recursos-delete.component';
+import { RecursosUpdateComponent } from './pages/admin/admin-recursos/recursos-update/recursos-update.component';
 import { AdminTagsComponent } from './pages/admin/admin-tags/admin-tags.component';
 import { TagsCreateComponent } from './pages/admin/admin-tags/tags-create/tags-create.component';
 import { TagsDeleteComponent } from './pages/admin/admin-tags/tags-delete/tags-delete.component';
@@ -49,6 +53,11 @@ const routes: Routes = [
   {path: 'admin/tags/create', component: TagsCreateComponent},
   {path: 'admin/tags/update/:id', component: TagsUpdateComponent},
   {path: 'admin/tags/delete/:id', component: TagsDeleteComponent},
+
+  {path: 'admin/recursos', component: AdminRecursosComponent},
+  {path: 'admin/recursos/create', component: RecursosCreateComponent},
+  {path: 'admin/recursos/update/:id', component: RecursosUpdateComponent},
+  {path: 'admin/recursos/delete/:id', component: RecursosDeleteComponent},
 ];
 
 @NgModule({

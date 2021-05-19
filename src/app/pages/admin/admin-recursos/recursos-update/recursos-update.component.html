@@ -1,0 +1,46 @@
+<!-- Header -->
+<div class="row header">
+    <div class="col-1 logo">
+        <img src="../../../assets/img/logo.png" alt="Logo DWTube">
+    </div>
+    <div class="col mt-2 title">DWTube</div>
+    <div class="col-1 text-right" (click)="goToHome()">
+        <p>
+            <img src="../../../assets/img/home.png" class="card-img-top" alt="Imatge usuari">
+            Inici
+        </p>
+    </div>
+    <div class="col-1 text-right" (click)="logout()">
+        <p>
+            <img src="../../../assets/img/logout.png" class="card-img-top logout" alt="Imatge sortida">
+            Logout
+        </p>
+    </div>
+</div>
+
+<!-- Formulari -->
+<div class="p-3 col-5">
+    <div class="form-group p-0">
+        <label for="titol">Titol del recurs</label>
+        <input type="text" name="titol" class="form-control" [(ngModel)]="titol"/>
+    </div>
+    <div class="form-group p-0">
+        <label for="descripcio">Breu descripcio</label>
+        <input type="text" name="descripcio" class="form-control" [(ngModel)]="descripcio"/>
+    </div>
+    <div class="form-group p-0">
+        <label for="explicacio">Explicacio del recurs</label>
+        <input type="text" name="explicacio" class="form-control" [(ngModel)]="explicacio"/>
+    </div>
+    <div class="form-group p-0">
+        <label for="disponibilitat">Disponibilitat del recurs</label>
+        <input type="text" name="disponibilitat" class="form-control" [(ngModel)]="disponibilitat"/>
+    </div>
+    <div class="form-group p-0">
+        <label for="categoria">Categoria</label>
+        <input type="text" name="categoria" class="form-control" [(ngModel)]="categoria"/>
+    </div>
+    <div class="form-group mt-2">
+        <button type="submit" class="btn btn-primary form-control" (click)="editRecurs()">Fer canvis</button>
+    </div>
+</div>

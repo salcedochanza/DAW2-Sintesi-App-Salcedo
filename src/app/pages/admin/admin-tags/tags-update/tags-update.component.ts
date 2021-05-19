@@ -21,8 +21,8 @@ export class TagsUpdateComponent implements OnInit {
           this.tagService.getTag(id).subscribe(
             (result:any) => {
               console.log(result);
-              this.id = result.group[0].id;
-              this.name = result.group[0].name;
+              this.id = result.tag[0].id;
+              this.name = result.tag[0].name;
 
               localStorage.setItem('token', JSON.stringify(result.token));
             }, (error: any) => {
