@@ -14,19 +14,25 @@ export class HomeComponent implements OnInit {
   public logged: boolean;
   public rol: string;
   private _categories: Category[];
+  public catFilter: Category[];
 
   constructor(private router: Router, private categoriesService: CategoriesService) {
     this.checkUserLogged();
-    this.categoriesService.getFills(0);
+    this.categoriesService.getParents(0);
 
     this.categoriesService.categories.subscribe(
       (originalCategory: Category[]) => {
         this._categories = originalCategory;
+        this.filterByCategory('0');
       }
     );
   }
 
   ngOnInit(): void {
+  }
+
+  filterByCategory(categoryId){
+    this.catFilter = this.categories.filter(category => category.parentId == categoryId)
   }
 
   get categories(): Category[] {

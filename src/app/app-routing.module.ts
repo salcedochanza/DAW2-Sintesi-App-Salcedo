@@ -22,6 +22,7 @@ import { DeleteComponent } from './pages/admin/users/delete/delete.component';
 import { UpdateComponent } from './pages/admin/users/update/update.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ListRecursosComponent } from './pages/list-recursos/list-recursos.component';
 import { LoginComponent } from './pages/login/login.component';
 import { EditComponent } from './pages/perfil/edit/edit.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
@@ -61,6 +62,7 @@ const routes: Routes = [
   {path: 'admin/recursos/delete/:id', component: RecursosDeleteComponent},
 
   {path: 'profe/recurs/create', component: ProfeRecursosCreateComponent},
+  {path: 'recursos/:id', component: ListRecursosComponent},
 ];
 
 @NgModule({

@@ -32,6 +32,7 @@ import { RecursosDeleteComponent } from './pages/admin/admin-recursos/recursos-d
 import { RecursosUpdateComponent } from './pages/admin/admin-recursos/recursos-update/recursos-update.component';
 import { ProfeRecursosCreateComponent } from './pages/profe/profe-recursos/profe-recursos-create/profe-recursos-create.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ListRecursosComponent } from './pages/list-recursos/list-recursos.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     RecursosCreateComponent,
     RecursosDeleteComponent,
     RecursosUpdateComponent,
-    ProfeRecursosCreateComponent
+    ProfeRecursosCreateComponent,
+    ListRecursosComponent
   ],
   imports: [
     BrowserModule,

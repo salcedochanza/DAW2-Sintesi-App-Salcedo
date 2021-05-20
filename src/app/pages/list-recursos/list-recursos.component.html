@@ -22,6 +22,12 @@
             Nou Recurs
         </p>
     </div>
+    <div class="col-1 text-right" (click)="goToHome()">
+        <p>
+            <img src="../../../assets/img/home.png" class="card-img-top" alt="Imatge usuari">
+            Inici
+        </p>
+    </div>
     <div class="col-1 text-right" *ngIf="logged" (click)="goToPerfil()">
         <p>
             <img src="../../../assets/img/user.png" class="card-img-top" alt="Imatge usuari">
@@ -45,10 +51,13 @@
             </div>
     </div>
     <div class="row categories">
-        <div *ngFor="let category of categories">
-            <div class="card" [routerLink]="['/recursos', category.id]">
+        <div *ngFor="let recurs of recursos">
+            <div class="card" [routerLink]="['/recursos/recurs', recurs.id]">
                 <div class="card-body">
-                    {{category.id}}: {{category.name}}
+                    <div>{{recurs.titol}}</div>
+                    <div>Etiquetes</div>
+                    <div>{{recurs.disponibilitat}}</div>
+                    <div>{{recurs.descripcio}}</div>
                 </div>
             </div>
         </div>

@@ -12,11 +12,15 @@ import { Router } from '@angular/router';
 export class CategoriesService {
   
   private _category: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
+  private _categoryF: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
 
   constructor(private http: HttpClient, private router: Router) { }
 
   get categories(): Observable<Category[]> {
     return this._category.asObservable();
+  }
+  get categoriesF(): Observable<Category[]> {
+    return this._categoryF.asObservable();
   }
 
 
@@ -121,7 +125,7 @@ export class CategoriesService {
 
 
 
-  getFills(parent: number){
+  getParents(parent: number){
     this._category.next([]);
     let options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -130,7 +134,32 @@ export class CategoriesService {
       (response: any) => {
         response.forEach(
           (category:any) => {
-            this.a(category);
+            this.a(category)
+            
+        });
+      }
+    );
+  }
+
+  getFills(parent: number){
+    this._categoryF.next([]);
+    let options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/fills?parent=" + parent, options).subscribe(
+      (response: any) => {
+        response.forEach(
+          (category:any) => {
+            let categorys: Category = new Category();
+            categorys.id = category.id;
+            categorys.name = category.name;
+            categorys.parentId = category.parent_id;
+            
+            this.categoriesF.pipe(take(1)).subscribe(
+              (originalCategory: Category[]) => {
+                this._categoryF.next(originalCategory.concat(categorys));
+              }
+            );
         });
       }
     );

@@ -28,34 +28,57 @@ export class RecursosService {
     return this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recurs?id=" + id, options);
   }
 
-  getRecursos(){
+  getRecursos(id=null){
     this._recurs.next([]);
     let options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", options).subscribe(
-      (response: any) => {
-        response.forEach(
-          (recurs:any) => {
-            let recursos: Recursos = new Recursos();
-            recursos.id = recurs.id;
-            recursos.titol = recurs.titol;
-            recursos.descripcio = recurs.descripcio;
-            recursos.disponibilitat = recurs.disponibilitat;
-            recursos.explicacio = recurs.explicacio;
-            recursos.categoria = recurs.categoria;
-            
-            this.recursos.pipe(take(1)).subscribe(
-              (originalCategory: Recursos[]) => {
-                this._recurs.next(originalCategory.concat(recursos));
-              }
-            );
-        });
-      }
-    );
+    if (id == null){
+      this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", options).subscribe(
+        (response: any) => {
+          response.forEach(
+            (recurs:any) => {
+              let recursos: Recursos = new Recursos();
+              recursos.id = recurs.id;
+              recursos.titol = recurs.titol;
+              recursos.descripcio = recurs.descripcio;
+              recursos.disponibilitat = recurs.disponibilitat;
+              recursos.explicacio = recurs.explicacio;
+              recursos.categoria = recurs.categoria;
+              
+              this.recursos.pipe(take(1)).subscribe(
+                (originalCategory: Recursos[]) => {
+                  this._recurs.next(originalCategory.concat(recursos));
+                }
+              );
+          });
+        }
+      );
+    } else {
+      this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursosCat?id=" + id, options).subscribe(
+        (response: any) => {
+          response.recurs.forEach(
+            (recurs:any) => {
+              let recursos: Recursos = new Recursos();
+              recursos.id = recurs.id;
+              recursos.titol = recurs.titol;
+              recursos.descripcio = recurs.descripcio;
+              recursos.disponibilitat = recurs.disponibilitat;
+              recursos.explicacio = recurs.explicacio;
+              recursos.categoria = recurs.categoria;
+              
+              this.recursos.pipe(take(1)).subscribe(
+                (originalCategory: Recursos[]) => {
+                  this._recurs.next(originalCategory.concat(recursos));
+                }
+              );
+          });
+        }
+      );
+    }
   }
 
-  newRecurs(titol: string, descripcio: string, disponibilitat: string, explicacio: string, categoria: string){
+  newRecurs(titol: string, descripcio: string, disponibilitat: string, explicacio: string, categoria: string, file){
     let token = JSON.parse(localStorage.getItem('token'));
     let options = {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'})
@@ -63,10 +86,14 @@ export class RecursosService {
     let data = {
       'titol': titol,
       'descripcio': descripcio,
-      'disponibilitat': disponibilitat,
       'explicacio': explicacio,
+      'disponibilitat': disponibilitat,
       'categoria': categoria,
+      'file': file,
     }
+    console.log(explicacio);
+    console.log(data);
+    console.log(file);
     this.http.post("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", data, options).subscribe(
       (response:any) => {
         console.log(response);

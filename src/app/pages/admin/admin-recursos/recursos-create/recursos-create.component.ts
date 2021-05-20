@@ -21,7 +21,7 @@ export class RecursosCreateComponent implements OnInit {
   }
 
   newRecurs(){
-    this.recursService.newRecurs(this.titol, this.descripcio, this.explicacio, this.disponibilitat, this.categoria);
+    this.recursService.newRecurs(this.titol, this.descripcio, this.explicacio, this.disponibilitat, this.categoria, "f");
   }
 
   logout(){
