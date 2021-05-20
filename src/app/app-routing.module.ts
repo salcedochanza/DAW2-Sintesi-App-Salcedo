@@ -27,6 +27,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { EditComponent } from './pages/perfil/edit/edit.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { ProfeRecursosCreateComponent } from './pages/profe/profe-recursos/profe-recursos-create/profe-recursos-create.component';
+import { ShowRecursComponent } from './pages/show-recurs/show-recurs.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch:'full'},
@@ -62,7 +63,9 @@ const routes: Routes = [
   {path: 'admin/recursos/delete/:id', component: RecursosDeleteComponent},
 
   {path: 'profe/recurs/create', component: ProfeRecursosCreateComponent},
+
   {path: 'recursos/:id', component: ListRecursosComponent},
+  {path: 'recursos/recurs/:id', component: ShowRecursComponent},
 ];
 
 @NgModule({
