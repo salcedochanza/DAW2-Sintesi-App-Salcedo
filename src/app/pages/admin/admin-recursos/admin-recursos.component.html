@@ -37,11 +37,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let recurs of recursos">
-                    <td>{{recurs.name}}</td>
-                    <td>{{recurs.name}}</td>
-                    <td>{{recurs.name}}</td>
-                    <td>{{recurs.name}}</td>
-                    <td>{{recurs.name}}</td>
+                    <td>{{recurs.titol}}</td>
+                    <td>{{recurs.descripcio}}</td>
+                    <td>{{recurs.disponibilitat}}</td>
+                    <td>{{recurs.explicacio}}</td>
+                    <td>{{recurs.categoria}}</td>
                     <td><button class="btn form-control" [routerLink]="['/admin/recursos/update', recurs.id]">Update</button></td>
                     <td><button class="btn form-control" [routerLink]="['/admin/recursos/delete', recurs.id]">Delete</button></td>
                 </tr>

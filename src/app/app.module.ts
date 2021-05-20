@@ -30,6 +30,8 @@ import { AdminRecursosComponent } from './pages/admin/admin-recursos/admin-recur
 import { RecursosCreateComponent } from './pages/admin/admin-recursos/recursos-create/recursos-create.component';
 import { RecursosDeleteComponent } from './pages/admin/admin-recursos/recursos-delete/recursos-delete.component';
 import { RecursosUpdateComponent } from './pages/admin/admin-recursos/recursos-update/recursos-update.component';
+import { ProfeRecursosCreateComponent } from './pages/profe/profe-recursos/profe-recursos-create/profe-recursos-create.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -58,13 +60,15 @@ import { RecursosUpdateComponent } from './pages/admin/admin-recursos/recursos-u
     AdminRecursosComponent,
     RecursosCreateComponent,
     RecursosDeleteComponent,
-    RecursosUpdateComponent
+    RecursosUpdateComponent,
+    ProfeRecursosCreateComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AngularEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

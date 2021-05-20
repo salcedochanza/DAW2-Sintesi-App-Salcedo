@@ -9,7 +9,7 @@ import { RecursosService } from 'src/app/services/recursos/recursos.service';
 })
 export class RecursosCreateComponent implements OnInit {
 
-  public name:string;
+  public titol:string;
   public descripcio:string;
   public explicacio:string;
   public disponibilitat:string;
@@ -21,7 +21,7 @@ export class RecursosCreateComponent implements OnInit {
   }
 
   newRecurs(){
-    this.recursService.newRecurs(this.name, this.descripcio, this.explicacio, this.disponibilitat, this.categoria);
+    this.recursService.newRecurs(this.titol, this.descripcio, this.explicacio, this.disponibilitat, this.categoria);
   }
 
   logout(){

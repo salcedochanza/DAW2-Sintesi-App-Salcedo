@@ -16,6 +16,7 @@ export class TagsUpdateComponent implements OnInit {
     let id: string;
     this.activatedRoute.params.subscribe(
       (params: Params) => {
+        console.log(params['id']);
         if (params['id'] != null ) {
           id = params['id'];
           this.tagService.getTag(id).subscribe(

@@ -22,8 +22,7 @@ export class TagsService {
   getTag(id: string){
     let token = JSON.parse(localStorage.getItem('token'));
     let options = {
-      headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}),
-      observe: 'body' as 'body'
+      headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'})
     };
     return this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/tag?id=" + id, options);
   }
