@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Groups } from 'src/app/models/groups';
 import { Recursos } from 'src/app/models/recursos';
 
 @Injectable({
@@ -80,21 +79,33 @@ export class RecursosService {
 
   newRecurs(titol: string, descripcio: string, disponibilitat: string, explicacio: string, categoria: string, file){
     let token = JSON.parse(localStorage.getItem('token'));
-    let options = {
-      headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'})
-    };
-    let data = {
-      'titol': titol,
-      'descripcio': descripcio,
-      'explicacio': explicacio,
-      'disponibilitat': disponibilitat,
-      'categoria': categoria,
-      'file': file,
-    }
-    console.log(explicacio);
-    console.log(data);
+    console.log(file.get('titol').value);
+
+    var formData: any = new FormData();
+    formData.append("file", file.get('file').value);
+    formData.append("titol", file.get('titol').value);
+    formData.append("descripcio", descripcio);
+    formData.append("explicacio", explicacio);
+    formData.append("disponibilitat", disponibilitat);
+    formData.append("categoria", categoria);
+    console.log(formData);
+    console.log(file.get('file').value);
     console.log(file);
-    this.http.post("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", data, options).subscribe(
+
+    let options = {
+      headers: new HttpHeaders({'Authorization': 'Bearer ' + token})
+    };
+    // let data = {
+    //   'titol': titol,
+    //   'descripcio': descripcio,
+    //   'explicacio': explicacio,
+    //   'disponibilitat': disponibilitat,
+    //   'categoria': categoria,
+    //   'file': file,
+    // }
+    // console.log(data);
+    
+    this.http.post("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", formData, options).subscribe(
       (response:any) => {
         console.log(response);
         if (response.status){

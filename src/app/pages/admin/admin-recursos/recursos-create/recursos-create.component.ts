@@ -15,13 +15,15 @@ export class RecursosCreateComponent implements OnInit {
   public disponibilitat:string;
   public categoria:string;
 
+  public f: File;
+
   constructor(private router: Router, private recursService: RecursosService) { }
 
   ngOnInit(): void {
   }
 
   newRecurs(){
-    this.recursService.newRecurs(this.titol, this.descripcio, this.explicacio, this.disponibilitat, this.categoria, "f");
+    this.recursService.newRecurs(this.titol, this.descripcio, this.explicacio, this.disponibilitat, this.categoria, this.f);
   }
 
   logout(){

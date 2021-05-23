@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
 
 @Component({
@@ -22,15 +23,23 @@ export class ProfeRecursosCreateComponent implements OnInit {
   public videorecurs;
   public categoria:string;
 
-  public selectedFile = null;
-  public file_data:any;
+  public selectedFile: File = null;
+  public uploadForm: FormGroup;
 
   @ViewChild('myCanvas', { static: false }) 
   myCanvas: ElementRef<HTMLCanvasElement>;
   public ctx: CanvasRenderingContext2D;
 
-  constructor(private router: Router, private http: HttpClient, private recursService: RecursosService) {
+  constructor(private router: Router, private http: HttpClient, private recursService: RecursosService, private formBuilder: FormBuilder) {
     this.checkUserLogged();
+    this.uploadForm = this.formBuilder.group({
+      file: [''],
+      titol: [],
+      descripcio: [],
+      explicacio: [],
+      categoria: [],
+      disponibilitat: [],
+    });
   }
   
   ngOnInit(): void {
@@ -39,19 +48,31 @@ export class ProfeRecursosCreateComponent implements OnInit {
   ngAfterViewInit() {
     console.log("afterinit");
     setTimeout(() => {
-      this.ctx = this.myCanvas.nativeElement.getContext('2d');
-      this.ctx.fillStyle = 'red';
-      this.ctx.fillRect(0, 0, 50, 50);
+
+        this.ctx = this.myCanvas.nativeElement.getContext('2d');
+        this.ctx.fillStyle = 'red';
+        this.ctx.fillRect(0, 0, 50, 50);
+      
+      
     }, 1000);
   }
+
+
   
   onFileSelected(event){
-    this.selectedFile = event.target.files[0];
+    console.log(event);
+    if (event.length > 0) {
+      const file = event[0];
+      console.log(file);
+      this.uploadForm.get('file').setValue(file);
+    }
   }
 
   newRecurs(){
-    console.log(this.explicacio);
-    this.recursService.newRecurs(this.titol, this.descripcio, this.disponibilitat, this.explicacio, this.categoria, this.selectedFile);
+    // var formData: any = new FormData();
+    // formData.append("file", this.uploadForm.get('file').value);
+    // console.log(formData);
+    this.recursService.newRecurs(this.titol, this.descripcio, this.disponibilitat, this.explicacio, this.categoria, this.uploadForm);
   }
 
   checkUserLogged(){

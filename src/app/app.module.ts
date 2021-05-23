@@ -34,6 +34,7 @@ import { ProfeRecursosCreateComponent } from './pages/profe/profe-recursos/profe
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ListRecursosComponent } from './pages/list-recursos/list-recursos.component';
 import { ShowRecursComponent } from './pages/show-recurs/show-recurs.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ShowRecursComponent } from './pages/show-recurs/show-recurs.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    AngularEditorModule
+    AngularEditorModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
