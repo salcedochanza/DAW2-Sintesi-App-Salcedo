@@ -37,50 +37,99 @@
         <div class="form-group p-0">
             <label for="selVideorecurs">Videorecurs</label>
         </div>
-        <select class="custom-select" formControlName="selVideorecurs">
-            <option value="1" selected>Infografia</option>
-            <option value="2">Video</option>
-            <option value="3">Video Youtube</option>
-            <option value="4">Pissarra Digital</option>
+        <select class="custom-select" formControlName="selVideorecurs" (change)="knowVideorecurs()">
+            <option [ngValue]="1" selected>Infografia</option>
+            <option [ngValue]="2">Video</option>
+            <option [ngValue]="3">Video Youtube</option>
+            <option [ngValue]="4">Pissarra Digital</option>
         </select>
 
-        <div class="form-group p-0" *ngIf="selVideorecurs == 1">
+        <div class="form-group p-0" *ngIf="uploadForm.controls['selVideorecurs'].value == 1">
             <label class="custom-file-label" for="customFile">Escull la imatge</label>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="customImage" (change)="onFileSelected($event.target.files)">
             </div>
         </div>
-        <div class="form-group p-0" *ngIf="selVideorecurs == 2">
+        <div class="form-group p-0" *ngIf="uploadForm.controls['selVideorecurs'].value == 2">
             <label class="custom-file-label" for="customFile">Escull el video</label>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile">
+                <input type="file" class="custom-file-input" id="customImage" (change)="onFileSelected($event.target.files)">
             </div>
         </div>
-        <div class="form-group p-0" *ngIf="selVideorecurs == 3">
+        <div class="form-group p-0" *ngIf="uploadForm.controls['selVideorecurs'].value == 3">
             <label for="linkYoutube">Link Youtube</label>
-            <input type="text" class="form-control" name="linkYoutube">
+            <input type="text" class="form-control" formControlName="videorecurs">
         </div>
-        <div class="form-group p-0" *ngIf="selVideorecurs == 4">
+        <div class="form-group p-0" *ngIf="uploadForm.controls['selVideorecurs'].value == 4">
             <div>
-                <label for="canvas">Canvas</label>
+                <label for="canvas" formControlName="videorecurs">Canvas</label>
             </div>
-            <canvas #myCanvas id="myCanvas"></canvas>
-            <div (click)="printSquare()">Square</div>
+            <canvas #myCanvas id="myCanvas" (mousedown)="comensarDibuix($event)" (mouseup)="acabarDibuix($event)"></canvas>
+            <div class="row">
+                <div class="col btn" (click)="changeLinea()"><img src="../../../assets/img/line.png" class="img-canvas" alt="Imatge linea"> Linea</div>
+                <div class="col btn" (click)="changeQuadrat()"><img src="../../../assets/img/rectangle.png" class="img-canvas" alt="Imatge quadrat"> Quadrat</div>
+                <div class="col btn" (click)="changeQuadratPle()"><img src="../../../assets/img/rectangle-fill.png" class="img-canvas" alt="Imatge quadrat ple"> Quadrat Ple</div>
+                <div class="col btn" (click)="changeCercle()"><img src="../../../assets/img/cercle.png" class="img-canvas" alt="Imatge cercle"> Cercle</div>
+                <div class="col btn" (click)="changeCerclePle()"><img src="../../../assets/img/cercle-fill.png" class="img-canvas" alt="Imatge cercle ple"> Cercle Ple</div>
+                <div class="col btn" (click)="changeText()"><img src="../../../assets/img/text.png" class="img-canvas" alt="Imatge text"> Text</div>
+                <div class="col btn" (click)="borrarCanvas()"><img src="../../../assets/img/trash.png" class="img-canvas" alt="Imatge borrar"> Borrar Tot</div>
+                <div class="col btn" (click)="changeBorrar()"><img src="../../../assets/img/trash.png" class="img-canvas" alt="Imatge borrar part"> Borrar Part</div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Color de contorn: <input type="color" formControlName="strokeStyle">
+                </div>
+                <div class="col-4">
+                    Ample lineat: <input type="number" formControlName="lineWidth">
+                </div>
+                <div class="col-4">
+                    Color de fons: <input type="color" formControlName="fillStyle">
+                </div>
+            </div>
         </div>
 
+        <div class="form-group p-0">
+            <label for="titol">Arxius adjunts</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customImage" (change)="onFileSelected($event.target.files)">
+            </div>
+        </div>
 
         <div class="form-group p-0">
             <label for="selDisponibilitat">Disponibilitat del recurs</label>
-            <select class="custom-select" formControlName="disponibilitat">
-                <option value="1" selected>Grup d'usuaris</option>
-                <option value="2">Perfil d'usuaris</option>
-                <option value="3">Link / Codi d'invitació</option>
-                <option value="4">Public</option>
-            </select>
+        </div>
+        <select class="custom-select" formControlName="selDisponibilitat" (change)="resetDisponibilitat()">
+            <option [ngValue]="1" selected>Grup d'usuaris</option>
+            <option [ngValue]="2">Perfil d'usuaris</option>
+            <option [ngValue]="3">Link / Codi d'invitació</option>
+            <option [ngValue]="4">Public</option>
+        </select>
+        <div class="form-group p-0" *ngIf="uploadForm.controls['selDisponibilitat'].value == 1">
+            <label class="custom-file-label" for="disponibilitat">Quin grup d'usuaris podrà entrar?</label>
+            <input type="text" formControlName="disponibilitat" class="form-control"/>
+        </div>
+        <div class="form-group p-0" *ngIf="uploadForm.controls['selDisponibilitat'].value == 2">
+            <label class="custom-file-label" for="disponibilitat">Quin perfil d'usuari podrà entrar?</label>
+            <input type="text" formControlName="disponibilitat" class="form-control"/>
+        </div>
+        <div class="form-group p-0" *ngIf="uploadForm.controls['selDisponibilitat'].value == 3">
+            <label class="custom-file-label" for="disponibilitat">Quin link o codi vols ficar?</label>
+            <input type="text" formControlName="disponibilitat" class="form-control"/>
+        </div>
+        <div class="form-group p-0" *ngIf="uploadForm.controls['selDisponibilitat'].value == 4">
+            <label class="custom-file-label" for="disponibilitat">El recurs estara disponible per tothom</label>
         </div>
         <div class="form-group p-0">
             <label for="categoria">Categoria</label>
             <input type="number" formControlName="categoria" class="form-control" />
+        </div>
+        <div class="form-group p-0">
+            <label for="etiquetes">Etiquetes</label>
+            <div class="row">
+                <div *ngFor="let tag of tags" class="col-2">
+                    <input type="checkbox" formControlName="etiquetes" [ngValue]="tag.name"> {{tag.name | titlecase}}
+                </div>
+            </div>
         </div>
         <div class="form-group mt-2">
             <button type="submit" class="btn btn-primary form-control">Crear nou recurs</button>

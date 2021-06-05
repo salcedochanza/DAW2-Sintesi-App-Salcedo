@@ -77,40 +77,36 @@ export class RecursosService {
     }
   }
 
-  newRecurs(titol: string, descripcio: string, disponibilitat: string, explicacio: string, categoria: string, file){
+  newRecurs(file){
     let token = JSON.parse(localStorage.getItem('token'));
     console.log(file.get('titol').value);
 
     var formData: any = new FormData();
     formData.append("file", file.get('file').value);
     formData.append("titol", file.get('titol').value);
-    formData.append("descripcio", descripcio);
-    formData.append("explicacio", explicacio);
-    formData.append("disponibilitat", disponibilitat);
-    formData.append("categoria", categoria);
+    formData.append("descripcio", file.get('descripcio').value);
+    formData.append("explicacio", file.get('explicacio').value);
+    formData.append("categoria", file.get('categoria').value);
+    formData.append("etiquetes", file.get('etiquetes').value);
+    formData.append("selVideorecurs", file.get('selVideorecurs').value);
+    formData.append("videorecurs", file.get('videorecurs').value);
+    formData.append("selDisponibilitat", file.get('selDisponibilitat').value);
+    formData.append("disponibilitat", file.get('disponibilitat').value);
+    formData.append("propietari", file.get('propietari').value);
     console.log(formData);
-    console.log(file.get('file').value);
-    console.log(file);
+    // console.log(file.get('file').value);
+    // console.log(file);
 
     let options = {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + token})
     };
-    // let data = {
-    //   'titol': titol,
-    //   'descripcio': descripcio,
-    //   'explicacio': explicacio,
-    //   'disponibilitat': disponibilitat,
-    //   'categoria': categoria,
-    //   'file': file,
-    // }
-    // console.log(data);
     
     this.http.post("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", formData, options).subscribe(
       (response:any) => {
         console.log(response);
         if (response.status){
           localStorage.setItem('token', JSON.stringify(response.token));
-          this.router.navigate(['admin/recursos']);
+          this.router.navigate(['home']);
         }
       }, (error: any) => {
           console.log(error);

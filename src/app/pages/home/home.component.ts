@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.categoriesService.categories.subscribe(
       (originalCategory: Category[]) => {
         this._categories = originalCategory;
-        this.filterByCategory('0');
+        //this.filterByCategory('0');
       }
     );
   }

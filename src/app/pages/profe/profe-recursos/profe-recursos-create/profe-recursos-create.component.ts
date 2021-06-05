@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
+import { Tag } from 'src/app/models/tag';
+import { TagsService } from 'src/app/services/tags/tags.service';
 
 @Component({
   selector: 'app-profe-recursos-create',
@@ -13,51 +15,173 @@ export class ProfeRecursosCreateComponent implements OnInit {
 
   public user;
 
-  public selVideorecurs:number = 1;
-  public selDisponibilitat:number = 1;
-  
-  public titol:string;
-  public descripcio:string;
-  public explicacio:string;
-  public disponibilitat:string = "1";
-  public videorecurs;
-  public categoria:string;
-
   public selectedFile: File = null;
   public uploadForm: FormGroup;
+
+  public forma = 'linea';
+  public text;
+
+  public preX;
+  public preY;
+
+  private _tags: Tag[];
 
   @ViewChild('myCanvas', { static: false }) 
   myCanvas: ElementRef<HTMLCanvasElement>;
   public ctx: CanvasRenderingContext2D;
 
-  constructor(private router: Router, private http: HttpClient, private recursService: RecursosService, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private recursService: RecursosService, private formBuilder: FormBuilder, private tagService: TagsService) {
     this.checkUserLogged();
+    this.tagService.getTags();
+    this.tagService.tags.subscribe(
+      (originalTags: Tag[]) => {
+        this._tags = originalTags;
+      }
+    );
     this.uploadForm = this.formBuilder.group({
       file: [''],
       titol: [],
       descripcio: [],
       explicacio: [],
       categoria: [],
+      etiquetes: [],
+      selVideorecurs: 1,
+      videorecurs: [],
+      selDisponibilitat: 1,
       disponibilitat: [],
+      propietari: [],
+      lineWidth:  3,
+      strokeStyle: '#0000ff',
+      fillStyle: '#ff0000',
     });
+    this.setPropietari();
   }
   
   ngOnInit(): void {
   }
 
-  ngAfterViewInit() {
-    console.log("afterinit");
-    setTimeout(() => {
-
-        this.ctx = this.myCanvas.nativeElement.getContext('2d');
-        this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(0, 0, 50, 50);
-      
-      
-    }, 1000);
+  get tags(): Tag[] {
+    return this._tags;
   }
 
+  changeLinea(){
+    this.forma = "linea";
+  }
+  changeQuadrat(){
+    this.forma = "quadrat";
+  }
+  changeQuadratPle(){
+    this.forma = "quadratPle";
+  }
+  changeCercle(){
+    this.forma = "cercle";
+  }
+  changeCerclePle(){
+    this.forma = "cerclePle";
+  }
+  changeText(){
+    this.forma = "text";
+    this.text = prompt("Que vols escriure?", "Text de exemple");
+  }
 
+  changeBorrar(){
+    this.forma = "borrar";
+  }
+
+  borrarCanvas(){
+    this.ctx.clearRect(0,0,this.myCanvas.nativeElement.width,this.myCanvas.nativeElement.height);
+  }
+
+  knowVideorecurs(){
+    if (this.uploadForm.controls['selVideorecurs'].value == 4){
+      setTimeout(() => {
+        this.ctx = this.myCanvas.nativeElement.getContext('2d');
+      }, 100);
+    }
+  }
+
+  comensarDibuix(evt){
+    var mousePos = this.oMousePos(this.myCanvas.nativeElement, evt);
+    if (this.forma == "linea"){
+      this.ctx.beginPath();
+      this.ctx.lineWidth = this.uploadForm.controls['lineWidth'].value;
+      this.ctx.strokeStyle = this.uploadForm.controls['strokeStyle'].value;
+      this.ctx.moveTo(mousePos.x, mousePos.y);
+    } else if (this.forma == "quadrat"){
+      this.ctx.beginPath();
+      this.ctx.lineWidth = this.uploadForm.controls['lineWidth'].value;
+      this.ctx.strokeStyle = this.uploadForm.controls['strokeStyle'].value;
+      this.preX=mousePos.x;
+      this.preY=mousePos.y;
+      this.ctx.moveTo(mousePos.x, mousePos.y);
+    } else if (this.forma == "quadratPle"){
+      this.ctx.beginPath();
+      this.ctx.lineWidth = this.uploadForm.controls['lineWidth'].value;
+      this.preX=mousePos.x;
+      this.preY=mousePos.y;
+      this.ctx.moveTo(mousePos.x, mousePos.y);
+    } else if (this.forma == "cercle"){
+      this.ctx.moveTo(mousePos.x, mousePos.y);
+      this.ctx.beginPath();
+      this.ctx.lineWidth = this.uploadForm.controls['lineWidth'].value;
+      this.ctx.strokeStyle = this.uploadForm.controls['strokeStyle'].value;
+      this.preX=mousePos.x;
+      this.preY=mousePos.y;
+    } else if (this.forma == "cerclePle"){
+      this.ctx.moveTo(mousePos.x, mousePos.y);
+      this.ctx.beginPath();
+      this.ctx.lineWidth = this.uploadForm.controls['lineWidth'].value;
+      this.ctx.strokeStyle = this.uploadForm.controls['strokeStyle'].value;
+      this.preX=mousePos.x;
+      this.preY=mousePos.y;
+    } else if (this.forma == "text"){
+      this.ctx.font = "20px Arial";
+      this.ctx.fillText(this.text, mousePos.x, mousePos.y);
+    } else if (this.forma == "borrar"){
+      this.preX=mousePos.x;
+      this.preY=mousePos.y;
+    }
+  }
+
+  acabarDibuix(evt){
+    var mousePos = this.oMousePos(this.myCanvas.nativeElement, evt);
+    if (this.forma == "linea"){
+      this.ctx.lineTo(mousePos.x, mousePos.y);
+      this.ctx.stroke();
+    } else if (this.forma == "quadrat"){
+      this.ctx.rect(mousePos.x, mousePos.y, this.preX - mousePos.x, this.preY - mousePos.y);
+      this.ctx.stroke();
+    } else if (this.forma == "quadratPle"){
+      this.ctx.rect(mousePos.x, mousePos.y, this.preX - mousePos.x, this.preY - mousePos.y);
+      this.ctx.fillStyle = this.uploadForm.controls['fillStyle'].value;
+      this.ctx.fill();
+    } else if (this.forma == "cercle"){
+      this.ctx.arc(this.preX, this.preY, Math.abs(this.preX - mousePos.x), 0, 2 * Math.PI);
+      this.ctx.stroke();
+    } else if (this.forma == "cerclePle"){
+      this.ctx.arc(this.preX, this.preY, Math.abs(this.preX - mousePos.x), 0, 2 * Math.PI);
+      this.ctx.fillStyle = this.uploadForm.controls['fillStyle'].value;
+      this.ctx.fill();
+    } else if (this.forma == "borrar") {
+      this.ctx.clearRect(this.preX,this.preY,this.preX - mousePos.x,this.preY - mousePos.y);
+    }
+  }
+  
+  oMousePos(canvas, evt) {
+    var ClientRect = canvas.getBoundingClientRect();
+    return {//objeto
+        x: Math.round((evt.clientX - ClientRect.left) / (ClientRect.right - ClientRect.left) * canvas.width),
+        y: Math.round((evt.clientY - ClientRect.top) / (ClientRect.bottom - ClientRect.top) * canvas.height)
+    }
+  }
+
+  resetDisponibilitat(){
+    this.uploadForm.controls['disponibilitat'].setValue("");
+  }
+
+  setPropietari(){
+    this.uploadForm.controls['propietari'].setValue(this.user.id);
+  }
   
   onFileSelected(event){
     console.log(event);
@@ -72,7 +196,7 @@ export class ProfeRecursosCreateComponent implements OnInit {
     // var formData: any = new FormData();
     // formData.append("file", this.uploadForm.get('file').value);
     // console.log(formData);
-    this.recursService.newRecurs(this.titol, this.descripcio, this.disponibilitat, this.explicacio, this.categoria, this.uploadForm);
+    this.recursService.newRecurs(this.uploadForm);
   }
 
   checkUserLogged(){
