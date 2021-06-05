@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
+import { Recursos } from 'src/app/models/recursos';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { RecursosService } from 'src/app/services/recursos/recursos.service';
 
 @Component({
   selector: 'app-home',
@@ -15,15 +17,22 @@ export class HomeComponent implements OnInit {
   public rol: string;
   private _categories: Category[];
   public catFilter: Category[];
+  private _recursos: Recursos[];
 
-  constructor(private router: Router, private categoriesService: CategoriesService) {
+  constructor(private router: Router, private categoriesService: CategoriesService, private recursService: RecursosService) {
     this.checkUserLogged();
     this.categoriesService.getParents(0);
 
     this.categoriesService.categories.subscribe(
       (originalCategory: Category[]) => {
         this._categories = originalCategory;
-        //this.filterByCategory('0');
+      }
+    );
+
+    this.recursService.getRecursos(0);
+    this.recursService.recursos.subscribe(
+      (originalRecursos: Recursos[]) => {
+        this._recursos = originalRecursos;
       }
     );
   }
@@ -31,12 +40,29 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  filterByCategory(categoryId){
-    this.catFilter = this.categories.filter(category => category.parentId == categoryId)
+  getCategories(categoryId){
+    this.categoriesService.getParents(categoryId);
+
+    this.categoriesService.categories.subscribe(
+      (originalCategory: Category[]) => {
+        this._categories = originalCategory;
+      }
+    );
+
+    this.recursService.getRecursos(categoryId);
+    this.recursService.recursos.subscribe(
+      (originalRecursos: Recursos[]) => {
+        this._recursos = originalRecursos;
+      }
+    );
   }
 
   get categories(): Category[] {
     return this._categories;
+  }
+
+  get recursos(): Recursos[] {
+    return this._recursos;
   }
 
   checkUserLogged(){

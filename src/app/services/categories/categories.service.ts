@@ -134,7 +134,16 @@ export class CategoriesService {
       (response: any) => {
         response.forEach(
           (category:any) => {
-            this.a(category);
+            let categorys: Category = new Category();
+            categorys.id = category.id;
+            categorys.name = category.name;
+            categorys.parentId = category.parent_id;
+            this.categories.pipe(take(1)).subscribe(
+              (originalCategory: Category[]) => {
+                this._category.next(originalCategory.concat(categorys));
+              }
+            );
+            //this.a(category);
         });
       }
     );

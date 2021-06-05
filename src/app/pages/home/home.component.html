@@ -42,13 +42,22 @@
                 <span class="input-group-text"><img src="../../../assets/img/loupe.png" alt="Lupa" class="lupa"></span>
             </div>
             <input type="text" class="form-control" placeholder="Text a buscar en TITOL">
-            </div>
+        </div>
     </div>
     <div class="row categories">
         <div *ngFor="let category of categories">
-            <div class="card" [routerLink]="['/recursos', category.id]">
+            <!-- <div class="card" [routerLink]="['/recursos', category.id]"> -->
+            <div class="card" (click)="getCategories(category.id)">
                 <div class="card-body">
-                    {{category.id}}: {{category.name}}
+                    {{category.id}}: {{category.name | titlecase}}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div *ngFor="let recurs of recursos">
+            <div class="card" [routerLink]="['/recursos/recurs', recurs.id]">
+                <div class="card-body">
+                    {{recurs.titol | titlecase}}
                 </div>
             </div>
         </div>
