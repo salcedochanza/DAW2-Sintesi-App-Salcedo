@@ -46,7 +46,6 @@
     </div>
     <div class="row categories">
         <div *ngFor="let category of categories">
-            <!-- <div class="card" [routerLink]="['/recursos', category.id]"> -->
             <div class="card" (click)="getCategories(category.id)">
                 <div class="card-body">
                     {{category.id}}: {{category.name | titlecase}}
@@ -55,9 +54,38 @@
         </div>
         <hr>
         <div *ngFor="let recurs of recursos">
-            <div class="card" [routerLink]="['/recursos/recurs', recurs.id]">
-                <div class="card-body">
-                    {{recurs.titol | titlecase}}
+            <div class="row">
+                <div class="col-10 recursos">
+                    <div class="card" [routerLink]="['/recursos/recurs', recurs.id]">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    {{recurs.titol | titlecase}}
+                                </div>
+                                <div class="col">
+                                    Etiquetes
+                                </div>
+                                <div class="col selDisponibilitat">
+                                    <div *ngIf="recurs.tipus_disponibilitat == 1"><img src="../../../assets/img/users-group.png" class="card-img-top" alt="Imatge Grup Usuaris"> {{recurs.disponibilitat | titlecase}}</div>
+                                    <div *ngIf="recurs.tipus_disponibilitat == 2"><img src="../../../assets/img/padlock.png" class="card-img-top" alt="Imatge Candau"> {{recurs.disponibilitat | titlecase}}</div>
+                                    <div *ngIf="recurs.tipus_disponibilitat == 3"><img src="../../../assets/img/key.png" class="card-img-top" alt="Imatge Clau"> Codi</div>
+                                    <div *ngIf="recurs.tipus_disponibilitat == 4"><img src="../../../assets/img/open-lock.png" class="card-img-top" alt="Imatge Candau obert"> Public</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{recurs.descripcio | titlecase}}
+                                </div>
+                            </div>         
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 favoritos recursos">
+                    <div class="card" (click)="addFavoritos(recurs.id)">
+                        <div class="card-body">
+                            <button type="button" class="btn"><img src="../../../assets/img/star.png" class="card-img-top" alt="Estrella"><br>Favoritos</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -44,6 +44,12 @@ export class RecursosService {
               recursos.disponibilitat = recurs.disponibilitat;
               recursos.explicacio = recurs.explicacio;
               recursos.categoria = recurs.categoria;
+              recursos.adjunts = recurs.adjunts;
+              recursos.canvas = recurs.canvas;
+              recursos.propietari = recurs.propietari;
+              recursos.tipus = recurs.tipus;
+              recursos.tipus_disponibilitat = recurs.tipus_disponibilitat;
+              recursos.videorecurs = recurs.videorecurs;
               
               this.recursos.pipe(take(1)).subscribe(
                 (originalCategory: Recursos[]) => {
@@ -65,6 +71,12 @@ export class RecursosService {
               recursos.disponibilitat = recurs.disponibilitat;
               recursos.explicacio = recurs.explicacio;
               recursos.categoria = recurs.categoria;
+              recursos.adjunts = recurs.adjunts;
+              recursos.canvas = recurs.canvas;
+              recursos.propietari = recurs.propietari;
+              recursos.tipus = recurs.tipus;
+              recursos.tipus_disponibilitat = recurs.tipus_disponibilitat;
+              recursos.videorecurs = recurs.videorecurs;
               
               this.recursos.pipe(take(1)).subscribe(
                 (originalCategory: Recursos[]) => {

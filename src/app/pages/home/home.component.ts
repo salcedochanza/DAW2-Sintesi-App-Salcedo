@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Recursos } from 'src/app/models/recursos';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
+import { FavoriteService } from 'src/app/services/favorite/favorite.service';
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
 
 @Component({
@@ -14,12 +15,13 @@ export class HomeComponent implements OnInit {
 
   public convidat: boolean = true;
   public logged: boolean;
+  public userId: number;
   public rol: string;
   private _categories: Category[];
   public catFilter: Category[];
   private _recursos: Recursos[];
 
-  constructor(private router: Router, private categoriesService: CategoriesService, private recursService: RecursosService) {
+  constructor(private router: Router, private categoriesService: CategoriesService, private recursService: RecursosService, private favoriteService: FavoriteService) {
     this.checkUserLogged();
     this.categoriesService.getParents(0);
 
@@ -65,12 +67,16 @@ export class HomeComponent implements OnInit {
     return this._recursos;
   }
 
+  addFavoritos(id){
+    this.favoriteService.addFavorite(this.userId, id);
+  }
+
   checkUserLogged(){
     let user = JSON.parse(localStorage.getItem('user'));
     if (user != null){
       this.logged = true;
       this.convidat = false;
-
+      this.userId = user.id;
       this.rol = user.rol;
     }
   }
