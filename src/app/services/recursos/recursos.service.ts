@@ -81,6 +81,7 @@ export class RecursosService {
     let token = JSON.parse(localStorage.getItem('token'));
     console.log(file.get('titol').value);
 
+    
     var formData: any = new FormData();
     formData.append("file", file.get('file').value);
     formData.append("titol", file.get('titol').value);
@@ -89,11 +90,18 @@ export class RecursosService {
     formData.append("categoria", file.get('categoria').value);
     formData.append("etiquetes", file.get('etiquetes').value);
     formData.append("selVideorecurs", file.get('selVideorecurs').value);
-    formData.append("videorecurs", file.get('videorecurs').value);
     formData.append("selDisponibilitat", file.get('selDisponibilitat').value);
     formData.append("disponibilitat", file.get('disponibilitat').value);
     formData.append("propietari", file.get('propietari').value);
+    if (file.get('selVideorecurs').value == 4){
+      let dataUrlCanvas = file.get('videorecurs').value.split(",");
+      console.log(dataUrlCanvas);
+      formData.append("videorecurs", dataUrlCanvas[1]);
+    } else {
+      formData.append("videorecurs", file.get('videorecurs').value);
+    }
     console.log(formData);
+    // console.log(file.get('videorecurs').value);
     // console.log(file.get('file').value);
     // console.log(file);
 

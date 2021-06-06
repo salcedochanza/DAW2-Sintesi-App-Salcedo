@@ -193,9 +193,11 @@ export class ProfeRecursosCreateComponent implements OnInit {
   }
 
   newRecurs(){
-    // var formData: any = new FormData();
-    // formData.append("file", this.uploadForm.get('file').value);
-    // console.log(formData);
+    if (this.uploadForm.controls['selVideorecurs'].value == 4){
+      let dataUrl = this.myCanvas.nativeElement.toDataURL();
+      console.log(dataUrl);
+      this.uploadForm.controls['videorecurs'].setValue(dataUrl);
+    }
     this.recursService.newRecurs(this.uploadForm);
   }
 
