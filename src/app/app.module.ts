@@ -35,6 +35,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ListRecursosComponent } from './pages/list-recursos/list-recursos.component';
 import { ShowRecursComponent } from './pages/show-recurs/show-recurs.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfeListRecursosComponent } from './pages/profe/profe-list-recursos/profe-list-recursos/profe-list-recursos.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecursosUpdateComponent,
     ProfeRecursosCreateComponent,
     ListRecursosComponent,
-    ShowRecursComponent
+    ShowRecursComponent,
+    ProfeListRecursosComponent
   ],
   imports: [
     BrowserModule,

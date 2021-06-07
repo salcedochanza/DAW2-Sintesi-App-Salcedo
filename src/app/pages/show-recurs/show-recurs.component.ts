@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Recursos } from 'src/app/models/recursos';
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
@@ -9,6 +9,7 @@ import { RecursosService } from 'src/app/services/recursos/recursos.service';
   styleUrls: ['./show-recurs.component.scss']
 })
 export class ShowRecursComponent implements OnInit {
+  @ViewChild('player') player: any;
 
   public convidat: boolean = true;
   public logged: boolean;
@@ -17,9 +18,14 @@ export class ShowRecursComponent implements OnInit {
   public id: string;
   public titol: string;
   public descripcio: string;
-  public disponibilitat: string;
-  public categoria: string;
   public explicacio: string;
+  public categoria: string;
+  public tipus_disponibilitat: string;
+  public disponibilitat: string;
+  public tipus: string;
+  public canvas: string;
+  public videorecurs: string
+  public propietari: string;
 
   constructor(private router: Router, private recursService: RecursosService, private activatedRoute: ActivatedRoute) {
     this.checkUserLogged();
@@ -31,14 +37,21 @@ export class ShowRecursComponent implements OnInit {
           id = params['id'];
           this.recursService.getRecurs(id).subscribe(
             (result:any) => {
-              console.log(result);
               this.id = result.recurs[0].id;
               this.titol = result.recurs[0].titol;
               this.descripcio = result.recurs[0].descripcio;
-              this.disponibilitat = result.recurs[0].disponibilitat;
-              this.categoria = result.recurs[0].categoria;
               this.explicacio = result.recurs[0].explicacio;
-              console.log(this.id);
+              this.categoria = result.recurs[0].categoria;
+              this.tipus_disponibilitat = result.recurs[0].tipus_disponibilitat;
+              this.disponibilitat = result.recurs[0].disponibilitat;
+              this.tipus = result.recurs[0].tipus;
+              this.canvas = "data:image/png;base64," + result.recurs[0].canvas;
+              if (this.tipus == '1' || this.tipus == '2'){
+                this.videorecurs = "http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/files/" + result.recurs[0].videorecurs;
+              } else {
+                this.videorecurs = result.recurs[0].videorecurs;
+              }
+              this.propietari = result.recurs[0].propietari;
 
               localStorage.setItem('token', JSON.stringify(result.token));
             }, (error: any) => {

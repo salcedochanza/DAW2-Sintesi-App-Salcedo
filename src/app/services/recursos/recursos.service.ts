@@ -89,6 +89,39 @@ export class RecursosService {
     }
   }
 
+  getRecursosByProfe(id){
+    let token = JSON.parse(localStorage.getItem('token'));
+    let options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursosProfe?id="+id, options).subscribe(
+      (response: any) => {
+        response.recurs.forEach(
+          (recurs:any) => {
+            let recursos: Recursos = new Recursos();
+            recursos.id = recurs.id;
+            recursos.titol = recurs.titol;
+            recursos.descripcio = recurs.descripcio;
+            recursos.disponibilitat = recurs.disponibilitat;
+            recursos.explicacio = recurs.explicacio;
+            recursos.categoria = recurs.categoria;
+            recursos.adjunts = recurs.adjunts;
+            recursos.canvas = recurs.canvas;
+            recursos.propietari = recurs.propietari;
+            recursos.tipus = recurs.tipus;
+            recursos.tipus_disponibilitat = recurs.tipus_disponibilitat;
+            recursos.videorecurs = recurs.videorecurs;
+            
+            this.recursos.pipe(take(1)).subscribe(
+              (originalCategory: Recursos[]) => {
+                this._recurs.next(originalCategory.concat(recursos));
+              }
+            );
+        });
+      }
+    );
+  }
+
   newRecurs(file){
     let token = JSON.parse(localStorage.getItem('token'));
     console.log(file.get('titol').value);

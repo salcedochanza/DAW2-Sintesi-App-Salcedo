@@ -16,6 +16,12 @@
             Administra
         </p>
     </div>
+    <div class="col-1 text-right" *ngIf="rol=='profe'" routerLink="/profe/recurs/list">
+        <p>
+            <img src="../../../assets/img/list.png" class="card-img-top" alt="Imatge llista recursos">
+            Teus Recursos
+        </p>
+    </div>
     <div class="col-1 text-right" *ngIf="rol=='profe'" routerLink="/profe/recurs/create">
         <p>
             <img src="../../../assets/img/add.png" class="card-img-top" alt="Imatge nou recurs">
