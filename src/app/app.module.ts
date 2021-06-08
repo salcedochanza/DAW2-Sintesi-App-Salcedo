@@ -36,6 +36,8 @@ import { ListRecursosComponent } from './pages/list-recursos/list-recursos.compo
 import { ShowRecursComponent } from './pages/show-recurs/show-recurs.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfeListRecursosComponent } from './pages/profe/profe-list-recursos/profe-list-recursos/profe-list-recursos.component';
+import { ProfeRecursosUpdateComponent } from './pages/profe/profe-recursos/profe-recursos-update/profe-recursos-update.component';
+import { ProfeRecursosDeleteComponent } from './pages/profe/profe-recursos/profe-recursos-delete/profe-recursos-delete.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { ProfeListRecursosComponent } from './pages/profe/profe-list-recursos/pr
     ProfeRecursosCreateComponent,
     ListRecursosComponent,
     ShowRecursComponent,
-    ProfeListRecursosComponent
+    ProfeListRecursosComponent,
+    ProfeRecursosUpdateComponent,
+    ProfeRecursosDeleteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Recursos } from 'src/app/models/recursos';
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
@@ -24,7 +25,7 @@ export class ShowRecursComponent implements OnInit {
   public disponibilitat: string;
   public tipus: string;
   public canvas: string;
-  public videorecurs: string
+  public videorecurs: string;
   public propietari: string;
 
   constructor(private router: Router, private recursService: RecursosService, private activatedRoute: ActivatedRoute) {
@@ -48,8 +49,8 @@ export class ShowRecursComponent implements OnInit {
               this.canvas = "data:image/png;base64," + result.recurs[0].canvas;
               if (this.tipus == '1' || this.tipus == '2'){
                 this.videorecurs = "http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/files/" + result.recurs[0].videorecurs;
-              } else {
-                this.videorecurs = result.recurs[0].videorecurs;
+              } else if (this.tipus == '3') {
+                // this.videorecurs = result.recurs[0].videorecurs;
               }
               this.propietari = result.recurs[0].propietari;
 

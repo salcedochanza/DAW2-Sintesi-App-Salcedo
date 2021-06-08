@@ -28,6 +28,8 @@ import { EditComponent } from './pages/perfil/edit/edit.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { ProfeListRecursosComponent } from './pages/profe/profe-list-recursos/profe-list-recursos/profe-list-recursos.component';
 import { ProfeRecursosCreateComponent } from './pages/profe/profe-recursos/profe-recursos-create/profe-recursos-create.component';
+import { ProfeRecursosDeleteComponent } from './pages/profe/profe-recursos/profe-recursos-delete/profe-recursos-delete.component';
+import { ProfeRecursosUpdateComponent } from './pages/profe/profe-recursos/profe-recursos-update/profe-recursos-update.component';
 import { ShowRecursComponent } from './pages/show-recurs/show-recurs.component';
 
 const routes: Routes = [
@@ -65,6 +67,8 @@ const routes: Routes = [
 
   {path: 'profe/recurs/create', component: ProfeRecursosCreateComponent},
   {path: 'profe/recurs/list', component: ProfeListRecursosComponent},
+  {path: 'profe/recurs/update/:id', component: ProfeRecursosUpdateComponent},
+  {path: 'profe/recurs/delete/:id', component: ProfeRecursosDeleteComponent},
 
   {path: 'recursos/:id', component: ListRecursosComponent},
   {path: 'recursos/recurs/:id', component: ShowRecursComponent},

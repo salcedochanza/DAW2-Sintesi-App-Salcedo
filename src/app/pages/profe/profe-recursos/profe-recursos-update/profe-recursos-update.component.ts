@@ -1,16 +1,17 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Tag } from 'src/app/models/tag';
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
 
 @Component({
-  selector: 'app-recursos-update',
-  templateUrl: './recursos-update.component.html',
-  styleUrls: ['./recursos-update.component.scss']
+  selector: 'app-profe-recursos-update',
+  templateUrl: './profe-recursos-update.component.html',
+  styleUrls: ['./profe-recursos-update.component.scss']
 })
-export class RecursosUpdateComponent implements OnInit {
+export class ProfeRecursosUpdateComponent implements OnInit {
+
   public user;
 
   public selectedFile: File = null;
@@ -75,6 +76,7 @@ export class RecursosUpdateComponent implements OnInit {
               this.uploadForm.controls['disponibilitat'].setValue(result.recurs[0].disponibilitat);
               this.uploadForm.controls['selVideorecurs'].setValue(result.recurs[0].tipus);
               if (result.recurs[0].tipus == 4){
+                this.knowVideorecurs();
                 this.uploadForm.controls['videorecurs'].setValue("data:image/png;base64," + result.recurs[0].canvas);
               } else {
                 this.uploadForm.controls['videorecurs'].setValue(result.recurs[0].videorecurs);
@@ -95,7 +97,6 @@ export class RecursosUpdateComponent implements OnInit {
         this._tags = originalTags;
       }
     );
-    
   }
   
   ngOnInit(): void {
@@ -136,8 +137,17 @@ export class RecursosUpdateComponent implements OnInit {
   knowVideorecurs(){
     if (this.uploadForm.controls['selVideorecurs'].value == 4){
       setTimeout(() => {
+        console.log(this.uploadForm.controls['videorecurs'].value);
         this.ctx = this.myCanvas.nativeElement.getContext('2d');
-        this.ctx.drawImage(this.uploadForm.controls['videorecurs'].value, 0, 0);
+        
+        var xurro='iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAACXklEQVR4nO3WMWqFUBRFUYfuzP7QTJMiKQPbI5G14Ba2B/bD4wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAetfpnLvjuMF1Hsd1OefSO58u+6U8WM7dcOfTZb/Urwfrczz+G+3cv73P4cG623UaGQpaGjAyNLQ0YGRoaGnAyNDQ0oCRoaGlASNDQ0sDRoaGlgaMDA0tDRgZGloaMDI0tDRgZGhoacDI0NDSgJGhoaUBI0NDSwNGhoaWBowMDS0NGBkaWhowMjS0NGBkaGhpwMjQ0NKAkaGhpQEjQ0NLA0aGhpYGjAwNLQ0YGRpaGjAyNLQ0YGRoaGnAyNDQ0oCRoaGlASNDQ0sDRoaGlgaMDA0tDRgZGloaMDI0tDRgZGhoacDI0NDSgJGhoaUBI0NDSwNGhoaWBowMDS0NGBkaWhowMjS0NGBkaGhpwMjQ0NKAkaGhpQEjQ0NLA0aGhpYGjAwNLQ0YGRpaGjAyNLQ0YGRoaGnAyNDQ0oCRoaGlASNDQ0sDRoaGlgaMDA0tDRgZGloaMDI0tDRgZGhoacDI0NDSgJGhoaUBI0NDSwNGhoaWBowMDS0NGBkaWhowMjS0NGBkaGhpwMjQ0NKAkaGhpQEjQ0NLA0aGhpYGjAwNLQ0YGRpaGjAyNLQ0YGRoaGnAyNDQ0oCRoaGlASNDQ0sDRoaGlgZ+jfz5/nbO/f0+hwfrbtf5Y2TnXHPn02W/lAfLuRvufLrsl3r8N9q5lx4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFD4AlytCCXCd4kBAAAAAElFTkSuQmCC';
+        var img=new Image();
+        img.src=this.uploadForm.controls['videorecurs'].value;
+        let ctx=this.ctx;
+        img.onload=function(){  //aqui THIS és img
+          ctx.drawImage(img, 0, 0);
+        };
+        // this.ctx.drawImage(this.uploadForm.controls['videorecurs'].value, 0, 0);
       }, 100);
     }
   }
@@ -267,5 +277,5 @@ export class RecursosUpdateComponent implements OnInit {
   goToHome(){
     this.router.navigate(['/home']);
   }
-  
+
 }

@@ -90,7 +90,6 @@ export class RecursosService {
   }
 
   getRecursosByProfe(id){
-    let token = JSON.parse(localStorage.getItem('token'));
     let options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
@@ -124,7 +123,7 @@ export class RecursosService {
 
   newRecurs(file){
     let token = JSON.parse(localStorage.getItem('token'));
-    console.log(file.get('titol').value);
+    console.log(file.get('etiquetes').value);
 
     
     var formData: any = new FormData();
@@ -176,6 +175,7 @@ export class RecursosService {
     };
     this.http.delete("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos/" + id, options).subscribe(
       (response:any) => {
+        console.log(response);
         if (response.status){
           localStorage.setItem('token', JSON.stringify(response.token));
           this.router.navigate(['admin/recursos']);
@@ -184,14 +184,15 @@ export class RecursosService {
     );
   }
 
-  editRecurs(id: string, titol: string, descripcio: string, disponibilitat: string, explicacio: string, categoria: string, token: string) {
+  editRecurs(file) {
+    let token = JSON.parse(localStorage.getItem('token'));
     let body = {
-      'id': id,
-      'titol': titol,
-      'descripcio': descripcio,
-      'disponibilitat': disponibilitat,
-      'explicacio': explicacio,
-      'categoria': categoria,
+    //   'id': id,
+    //   'titol': titol,
+    //   'descripcio': descripcio,
+    //   'disponibilitat': disponibilitat,
+    //   'explicacio': explicacio,
+    //   'categoria': categoria,
     }
     let options = {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'})

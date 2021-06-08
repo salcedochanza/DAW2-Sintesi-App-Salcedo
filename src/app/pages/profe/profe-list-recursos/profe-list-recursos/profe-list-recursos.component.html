@@ -22,3 +22,29 @@
         </p>
     </div>
 </div>
+
+<div class="row body mt-5">
+    <div class="row recursos">
+        <div class="table-title"><h2>Els teus recursos</h2></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nom Recurs</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Veure</th>
+                    <th scope="col">Modifica</th>
+                    <th scope="col">Elimina</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let recurs of recursos">
+                    <td>{{recurs.titol}}</td>
+                    <td>{{recurs.categoria}}</td>
+                    <td><button class="btn form-control" [routerLink]="['/recursos/recurs', recurs.id]">Veure</button></td>
+                    <td><button class="btn form-control" [routerLink]="['/profe/recurs/update', recurs.id]">Update</button></td>
+                    <td><button class="btn form-control" [routerLink]="['/profe/recurs/delete', recurs.id]">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

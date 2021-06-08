@@ -32,15 +32,26 @@
         }
     }
 }
-.recursos{
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 30px;
-    .recurs{
-        margin-top: 15px;
-    }
+
+.formulari{
+    margin-left: 15%;
 }
-button{
-    background-color: #da805dbd;
-    border: blue 1px solid;
+
+select{
+    width: 100%;
+}
+
+.form-group{
+    margin-top: 10px;
+}
+
+.img-canvas{
+    width: 20px;
+    height: 20px;
+}
+
+canvas{
+    width: 100%;
+    height: 300px;
+    border: solid 1px black;
 }

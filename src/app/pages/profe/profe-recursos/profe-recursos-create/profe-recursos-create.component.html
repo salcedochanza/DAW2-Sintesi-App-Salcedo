@@ -127,7 +127,8 @@
             <label for="etiquetes">Etiquetes</label>
             <div class="row">
                 <div *ngFor="let tag of tags" class="col-2">
-                    <input type="checkbox" formControlName="etiquetes" [ngValue]="tag.name"> {{tag.name | titlecase}}
+                    <input type="checkbox" [value]="tag.id" (change)="onCBChange($event)">
+                    <label [for]="tag.name">{{tag.name | titlecase}}</label>
                 </div>
             </div>
         </div>

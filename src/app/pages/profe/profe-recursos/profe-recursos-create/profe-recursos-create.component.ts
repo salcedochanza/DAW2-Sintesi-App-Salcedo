@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
 import { Tag } from 'src/app/models/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
@@ -44,7 +44,7 @@ export class ProfeRecursosCreateComponent implements OnInit {
       descripcio: [],
       explicacio: [],
       categoria: [],
-      etiquetes: [],
+      etiquetes: this.formBuilder.array([]),
       selVideorecurs: 1,
       videorecurs: [],
       selDisponibilitat: 1,
@@ -192,12 +192,37 @@ export class ProfeRecursosCreateComponent implements OnInit {
     }
   }
 
+  onCBChange(e) {
+    const tabsCB: FormArray = this.uploadForm.get('etiquetes') as FormArray;
+    if (e.target.checked) {
+      tabsCB.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      tabsCB.controls.forEach(
+        (item: FormControl) => {
+          if (item.value == e.target.value) {
+            tabsCB.removeAt(i);
+            return;
+          }
+          i++;
+        }
+      );
+    }
+  }
+
   newRecurs(){
     if (this.uploadForm.controls['selVideorecurs'].value == 4){
       let dataUrl = this.myCanvas.nativeElement.toDataURL();
       console.log(dataUrl);
       this.uploadForm.controls['videorecurs'].setValue(dataUrl);
     }
+    const tagsCB: FormArray = this.uploadForm.controls['etiquetes'] as FormArray;
+    tagsCB.controls.forEach(
+      (cbelem) => {
+        console.log(cbelem.value);
+      }
+    );
+    console.log(tagsCB.value);
     this.recursService.newRecurs(this.uploadForm);
   }
 
