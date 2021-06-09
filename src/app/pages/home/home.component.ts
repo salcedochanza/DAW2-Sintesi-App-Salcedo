@@ -69,7 +69,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.categoriesService.getPath(categoryId).subscribe(
         (result: any) => {
-          console.log(result);
           localStorage.setItem('token', JSON.stringify(result.token));
           let objpath = {nom:result.group[0].name,id:result.group[0].id};
   
