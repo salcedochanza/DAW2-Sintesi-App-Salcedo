@@ -45,6 +45,7 @@ export class ProfeRecursosUpdateComponent implements OnInit {
     this.checkUserLogged();
     this.uploadForm = this.formBuilder.group({
       file: [''],
+      id: [],
       titol: [],
       descripcio: [],
       explicacio: [],
@@ -68,6 +69,7 @@ export class ProfeRecursosUpdateComponent implements OnInit {
             (result:any) => {
               console.log(result);
               console.log(result.recurs[0].titol);
+              this.uploadForm.controls['id'].setValue(result.recurs[0].id);
               this.uploadForm.controls['titol'].setValue(result.recurs[0].titol);
               this.uploadForm.controls['descripcio'].setValue(result.recurs[0].descripcio);
               this.uploadForm.controls['explicacio'].setValue(result.recurs[0].explicacio);

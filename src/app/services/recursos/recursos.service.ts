@@ -186,19 +186,30 @@ export class RecursosService {
 
   editRecurs(file) {
     let token = JSON.parse(localStorage.getItem('token'));
-    let body = {
-    //   'id': id,
-    //   'titol': titol,
-    //   'descripcio': descripcio,
-    //   'disponibilitat': disponibilitat,
-    //   'explicacio': explicacio,
-    //   'categoria': categoria,
+    var formData: any = new FormData();
+    formData.append("file", file.get('file').value);
+    formData.append("id", file.get('id').value);
+    formData.append("titol", file.get('titol').value);
+    formData.append("descripcio", file.get('descripcio').value);
+    formData.append("explicacio", file.get('explicacio').value);
+    formData.append("categoria", file.get('categoria').value);
+    formData.append("etiquetes", file.get('etiquetes').value);
+    formData.append("selVideorecurs", file.get('selVideorecurs').value);
+    formData.append("selDisponibilitat", file.get('selDisponibilitat').value);
+    formData.append("disponibilitat", file.get('disponibilitat').value);
+    formData.append("propietari", file.get('propietari').value);
+    if (file.get('selVideorecurs').value == 4){
+      let dataUrlCanvas = file.get('videorecurs').value.split(",");
+      console.log(dataUrlCanvas);
+      formData.append("videorecurs", dataUrlCanvas[1]);
+    } else {
+      formData.append("videorecurs", file.get('videorecurs').value);
     }
     let options = {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'})
     };
     
-    this.http.put("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", body, options).subscribe(
+    this.http.put("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", formData, options).subscribe(
       (body: any) => {
         localStorage.setItem('token', JSON.stringify(body.token));
         this.router.navigate(['/admin/recursos']);

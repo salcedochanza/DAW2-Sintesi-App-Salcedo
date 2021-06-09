@@ -21,10 +21,11 @@ export class HomeComponent implements OnInit {
   public catFilter: Category[];
   private _recursos: Recursos[];
 
+  public path: string[] = ['DwTube'];
+
   constructor(private router: Router, private categoriesService: CategoriesService, private recursService: RecursosService, private favoriteService: FavoriteService) {
     this.checkUserLogged();
     this.categoriesService.getParents(0);
-
     this.categoriesService.categories.subscribe(
       (originalCategory: Category[]) => {
         this._categories = originalCategory;
@@ -43,8 +44,8 @@ export class HomeComponent implements OnInit {
   }
 
   getCategories(categoryId){
+    console.log(categoryId);
     this.categoriesService.getParents(categoryId);
-
     this.categoriesService.categories.subscribe(
       (originalCategory: Category[]) => {
         this._categories = originalCategory;
@@ -57,6 +58,27 @@ export class HomeComponent implements OnInit {
         this._recursos = originalRecursos;
       }
     );
+
+    this.path = [];
+    this.getPath(categoryId);
+  }
+  
+  getPath(categoryId){
+    this.categoriesService.getPath(categoryId).subscribe(
+      (result: any) => {
+        localStorage.setItem('token', JSON.stringify(result.token));
+        console.log(result);
+        console.log(result.group[0].name);
+        this.path.push(result.group[0].name);
+        if(result.group[0].parent_id != 0) {
+          this.getPath(result.group[0].parent_id);
+        } else {
+          this.path.push('DwTube');
+          this.path.reverse();
+          console.log(this.path);
+        }
+      }
+    )
   }
 
   get categories(): Category[] {

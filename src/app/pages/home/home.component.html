@@ -51,6 +51,11 @@
         </div>
     </div>
     <div class="row categories">
+        <div *ngFor="let singlePath of path">
+            {{singlePath | titlecase}}/
+        </div>
+    </div>
+    <div class="row categories">
         <div *ngFor="let category of categories">
             <div class="card" (click)="getCategories(category.id)">
                 <div class="card-body">

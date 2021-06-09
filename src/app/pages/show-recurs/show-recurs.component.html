@@ -54,10 +54,8 @@
                     <img [src]="videorecurs" alt="document">
                 </div>
                 <div *ngIf="tipus == '3'">
-                    <div id="searchDiv">
-                        <input type="text" name="searchBar" id="searchBar"><button onclick="searchVideo()">Busca el video</button><br><br><br>
-                    </div>
-                    <div id="player"></div>
+                    <button (click)="startVideo(videorecurs)">Start</button>
+                    <div id="player" onload="startVideo(videorecurs)" (load)="startVideo(videorecurs)"></div>
                     <div id="actionsBar" style="display: none;">
                       <div id="playButtonDiv">
                         <button onclick="playVideo()" id="playButton">Play</button>

@@ -23,6 +23,14 @@ export class CategoriesService {
     return this._categoryF.asObservable();
   }
 
+  getPath(id: string){
+    let token = JSON.parse(localStorage.getItem('token'));
+    let options = {
+      headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}),
+      observe: 'body' as 'body'
+    };
+    return this.http.get("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/category?id=" + id, options);
+  }
 
   getCategory(id: string){
     let token = JSON.parse(localStorage.getItem('token'));
