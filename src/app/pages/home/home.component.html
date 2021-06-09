@@ -51,8 +51,10 @@
         </div>
     </div>
     <div class="row categories">
-        <div *ngFor="let singlePath of path">
-            {{singlePath | titlecase}}/
+        <div>
+            <span *ngFor="let singlePath of path">
+                <span class="pointer" (click)="getCategories(singlePath.id)">{{singlePath.nom | titlecase}}</span> |
+            </span>
         </div>
     </div>
     <div class="row categories">

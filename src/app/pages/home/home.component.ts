@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   public catFilter: Category[];
   private _recursos: Recursos[];
 
-  public path: string[] = ['DwTube'];
+  public path: any = [ {nom:"dwtube",id:"0"} ];
 
   constructor(private router: Router, private categoriesService: CategoriesService, private recursService: RecursosService, private favoriteService: FavoriteService) {
     this.checkUserLogged();
@@ -63,18 +63,28 @@ export class HomeComponent implements OnInit {
   }
   
   getPath(categoryId){
-    this.categoriesService.getPath(categoryId).subscribe(
-      (result: any) => {
-        localStorage.setItem('token', JSON.stringify(result.token));
-        this.path.push(result.group[0].name);
-        if(result.group[0].parent_id != 0) {
-          this.getPath(result.group[0].parent_id);
-        } else {
-          this.path.push('DwTube');
-          this.path.reverse();
+    if (categoryId == '0'){
+      let objpath = {nom:'DwTube',id:'0'};
+      this.path.push(objpath);
+    } else {
+      this.categoriesService.getPath(categoryId).subscribe(
+        (result: any) => {
+          console.log(result);
+          localStorage.setItem('token', JSON.stringify(result.token));
+          let objpath = {nom:result.group[0].name,id:result.group[0].id};
+  
+          this.path.push(objpath);
+  
+          if(result.group[0].parent_id != 0) {
+            this.getPath(result.group[0].parent_id);
+          } else {
+            let objpath = {nom:'DwTube',id:'0'};
+            this.path.push(objpath);
+            this.path.reverse();
+          }
         }
-      }
-    )
+      )
+    }
   }
 
   get categories(): Category[] {
