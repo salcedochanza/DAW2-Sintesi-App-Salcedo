@@ -5,6 +5,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
 import { Tag } from 'src/app/models/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { Category } from 'src/app/models/category';
+import { CategoriesService } from 'src/app/services/categories/categories.service';
 
 @Component({
   selector: 'app-profe-recursos-create',
@@ -25,19 +27,30 @@ export class ProfeRecursosCreateComponent implements OnInit {
   public preY;
 
   private _tags: Tag[];
+  private _categories: Category[];
 
   @ViewChild('myCanvas', { static: false }) 
   myCanvas: ElementRef<HTMLCanvasElement>;
   public ctx: CanvasRenderingContext2D;
 
-  constructor(private router: Router, private recursService: RecursosService, private formBuilder: FormBuilder, private tagService: TagsService) {
+  constructor(private router: Router, private recursService: RecursosService, private formBuilder: FormBuilder, private tagService: TagsService, private categoriesService: CategoriesService) {
     this.checkUserLogged();
+
+    this.categoriesService.getCategories();
+    this.categoriesService.categories.subscribe(
+      (originalCategory: Category[]) => {
+        this._categories = originalCategory;
+      }
+    );
+    
+    console.log(this.categories);
     this.tagService.getTags();
     this.tagService.tags.subscribe(
       (originalTags: Tag[]) => {
         this._tags = originalTags;
       }
     );
+
     this.uploadForm = this.formBuilder.group({
       file: [''],
       titol: [],
@@ -62,6 +75,10 @@ export class ProfeRecursosCreateComponent implements OnInit {
 
   get tags(): Tag[] {
     return this._tags;
+  }
+
+  get categories(): Category[] {
+    return this._categories;
   }
 
   changeLinea(){
