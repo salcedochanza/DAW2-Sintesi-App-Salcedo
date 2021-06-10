@@ -78,13 +78,6 @@
             </div>
         </div>
 
-        <div class="form-group p-0">
-            <label for="titol">Arxius adjunts</label>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customImage" (change)="onFileSelected($event.target.files)">
-            </div>
-        </div>
-
         <div class="form-group p-0" *ngIf="uploadForm.controls['selDisponibilitat'].value == 1">
             <label class="custom-file-label" for="disponibilitat">Quin grup d'usuaris podrà entrar?</label>
             <input type="text" formControlName="disponibilitat" class="form-control"/>

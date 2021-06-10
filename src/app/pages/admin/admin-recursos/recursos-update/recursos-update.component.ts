@@ -44,6 +44,7 @@ export class RecursosUpdateComponent implements OnInit {
     this.checkUserLogged();
     this.uploadForm = this.formBuilder.group({
       file: [''],
+      id: [],
       titol: [],
       descripcio: [],
       explicacio: [],
@@ -66,7 +67,7 @@ export class RecursosUpdateComponent implements OnInit {
           this.recursService.getRecurs(id).subscribe(
             (result:any) => {
               console.log(result);
-              console.log(result.recurs[0].titol);
+              this.uploadForm.controls['id'].setValue(result.recurs[0].id);
               this.uploadForm.controls['titol'].setValue(result.recurs[0].titol);
               this.uploadForm.controls['descripcio'].setValue(result.recurs[0].descripcio);
               this.uploadForm.controls['explicacio'].setValue(result.recurs[0].explicacio);
@@ -75,6 +76,7 @@ export class RecursosUpdateComponent implements OnInit {
               this.uploadForm.controls['disponibilitat'].setValue(result.recurs[0].disponibilitat);
               this.uploadForm.controls['selVideorecurs'].setValue(result.recurs[0].tipus);
               if (result.recurs[0].tipus == 4){
+                this.knowVideorecurs();
                 this.uploadForm.controls['videorecurs'].setValue("data:image/png;base64," + result.recurs[0].canvas);
               } else {
                 this.uploadForm.controls['videorecurs'].setValue(result.recurs[0].videorecurs);
@@ -95,7 +97,6 @@ export class RecursosUpdateComponent implements OnInit {
         this._tags = originalTags;
       }
     );
-    
   }
   
   ngOnInit(): void {
@@ -136,8 +137,17 @@ export class RecursosUpdateComponent implements OnInit {
   knowVideorecurs(){
     if (this.uploadForm.controls['selVideorecurs'].value == 4){
       setTimeout(() => {
+        console.log(this.uploadForm.controls['videorecurs'].value);
         this.ctx = this.myCanvas.nativeElement.getContext('2d');
-        this.ctx.drawImage(this.uploadForm.controls['videorecurs'].value, 0, 0);
+        
+        var xurro='iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAACXklEQVR4nO3WMWqFUBRFUYfuzP7QTJMiKQPbI5G14Ba2B/bD4wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAetfpnLvjuMF1Hsd1OefSO58u+6U8WM7dcOfTZb/Urwfrczz+G+3cv73P4cG623UaGQpaGjAyNLQ0YGRoaGnAyNDQ0oCRoaGlASNDQ0sDRoaGlgaMDA0tDRgZGloaMDI0tDRgZGhoacDI0NDSgJGhoaUBI0NDSwNGhoaWBowMDS0NGBkaWhowMjS0NGBkaGhpwMjQ0NKAkaGhpQEjQ0NLA0aGhpYGjAwNLQ0YGRpaGjAyNLQ0YGRoaGnAyNDQ0oCRoaGlASNDQ0sDRoaGlgaMDA0tDRgZGloaMDI0tDRgZGhoacDI0NDSgJGhoaUBI0NDSwNGhoaWBowMDS0NGBkaWhowMjS0NGBkaGhpwMjQ0NKAkaGhpQEjQ0NLA0aGhpYGjAwNLQ0YGRpaGjAyNLQ0YGRoaGnAyNDQ0oCRoaGlASNDQ0sDRoaGlgaMDA0tDRgZGloaMDI0tDRgZGhoacDI0NDSgJGhoaUBI0NDSwNGhoaWBowMDS0NGBkaWhowMjS0NGBkaGhpwMjQ0NKAkaGhpQEjQ0NLA0aGhpYGjAwNLQ0YGRpaGjAyNLQ0YGRoaGnAyNDQ0oCRoaGlASNDQ0sDRoaGlgZ+jfz5/nbO/f0+hwfrbtf5Y2TnXHPn02W/lAfLuRvufLrsl3r8N9q5lx4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFD4AlytCCXCd4kBAAAAAElFTkSuQmCC';
+        var img=new Image();
+        img.src=this.uploadForm.controls['videorecurs'].value;
+        let ctx=this.ctx;
+        img.onload=function(){  //aqui THIS és img
+          ctx.drawImage(img, 0, 0);
+        };
+        // this.ctx.drawImage(this.uploadForm.controls['videorecurs'].value, 0, 0);
       }, 100);
     }
   }
@@ -240,6 +250,8 @@ export class RecursosUpdateComponent implements OnInit {
       console.log(dataUrl);
       this.uploadForm.controls['videorecurs'].setValue(dataUrl);
     }
+    console.log("ts");
+    console.log(this.uploadForm);
     this.recursService.editRecurs(this.uploadForm);
   }
 
@@ -249,7 +261,7 @@ export class RecursosUpdateComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       this.getUserInfo();
-      if (user.rol != 'profe'){
+      if (user.rol != 'admin'){
         this.router.navigate(['/login']);
       }
     }
