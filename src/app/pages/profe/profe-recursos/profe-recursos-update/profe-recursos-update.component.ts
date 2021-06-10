@@ -68,7 +68,6 @@ export class ProfeRecursosUpdateComponent implements OnInit {
           this.recursService.getRecurs(id).subscribe(
             (result:any) => {
               console.log(result);
-              console.log(result.recurs[0].titol);
               this.uploadForm.controls['id'].setValue(result.recurs[0].id);
               this.uploadForm.controls['titol'].setValue(result.recurs[0].titol);
               this.uploadForm.controls['descripcio'].setValue(result.recurs[0].descripcio);
@@ -252,6 +251,8 @@ export class ProfeRecursosUpdateComponent implements OnInit {
       console.log(dataUrl);
       this.uploadForm.controls['videorecurs'].setValue(dataUrl);
     }
+    console.log("ts");
+    console.log(this.uploadForm);
     this.recursService.editRecurs(this.uploadForm);
   }
 

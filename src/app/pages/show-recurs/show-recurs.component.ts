@@ -4,6 +4,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Recursos } from 'src/app/models/recursos';
 import { RecursosService } from 'src/app/services/recursos/recursos.service';
 
+
+declare const loadYoutubePlayer: any;
+
 @Component({
   selector: 'app-show-recurs',
   templateUrl: './show-recurs.component.html',
@@ -27,10 +30,10 @@ export class ShowRecursComponent implements OnInit {
   public disponibilitat: string;
   public tipus: string;
   public canvas: string;
-  public videorecurs: string;
+  public videorecurs: any;
   public propietari: string;
 
-  constructor(private router: Router, private recursService: RecursosService, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private recursService: RecursosService, private activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {
     this.checkUserLogged();
     this.checkUserGroups();
 
@@ -49,11 +52,13 @@ export class ShowRecursComponent implements OnInit {
               this.tipus_disponibilitat = result.recurs[0].tipus_disponibilitat;
               this.disponibilitat = result.recurs[0].disponibilitat;
               this.tipus = result.recurs[0].tipus;
-              this.canvas = "data:image/png;base64," + result.recurs[0].canvas;
               if (this.tipus == '1' || this.tipus == '2'){
                 this.videorecurs = "http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/files/" + result.recurs[0].videorecurs;
               } else if (this.tipus == '3') {
-                // this.videorecurs = result.recurs[0].videorecurs;
+                // loadYoutubePlayer(this.videorecurs);
+                this.videorecurs = this._sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + result.recurs[0].videorecurs);
+              } else if (this.tipus == '4'){
+                this.canvas = "data:image/png;base64," + result.recurs[0].canvas;
               }
               this.propietari = result.recurs[0].propietari;
 
@@ -81,7 +86,6 @@ export class ShowRecursComponent implements OnInit {
                       alert("No tens el rol necessari");
                       this.goToHome();
                     } 
-    
                   } else if (this.tipus_disponibilitat == '3'){
                     let codi = prompt("Entra el codi necessari per entrar al recurs:", "");
                     if(codi != this.disponibilitat){
@@ -91,7 +95,6 @@ export class ShowRecursComponent implements OnInit {
                   } else {}
                 }
               }
-
               localStorage.setItem('token', JSON.stringify(result.token));
             }, (error: any) => {
               localStorage.setItem('token', JSON.stringify(error.error.token));
@@ -102,7 +105,7 @@ export class ShowRecursComponent implements OnInit {
       }
     );
   }
-
+  
   ngOnInit(): void {
   }
 

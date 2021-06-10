@@ -54,24 +54,24 @@
                     <img [src]="videorecurs" alt="document">
                 </div>
                 <div *ngIf="tipus == '3'">
-                    <button (click)="startVideo(videorecurs)">Start</button>
-                    <div id="player" onload="startVideo(videorecurs)" (load)="startVideo(videorecurs)"></div>
-                    <div id="actionsBar" style="display: none;">
-                      <div id="playButtonDiv">
+                    <!-- <input [value]="videorecurs" id="videorecurs" name="videorecurs">
+                    <div id="player"></div>
+                    <div id="actionsBar" class="row">
+                      <div id="playButtonDiv" class="col">
                         <button onclick="playVideo()" id="playButton">Play</button>
                       </div>
-                      <div id="pauseButtonDiv" style="display: none;">
+                      <div id="pauseButtonDiv" style="display: none;" class="col">
                         <button onclick="pauseVideo()" id="pauseButton">Pause</button>
                       </div>
-                      <div id="stopButtonDiv">
+                      <div id="stopButtonDiv" class="col">
                         <button onclick="stopVideo()" id="stopButton">Stop</button>
                       </div>
-                      <div id="volumeInputDiv">
+                      <div id="volumeInputDiv" class="col">
                         <label for="volumeInput">Volumen: </label>
                         <input type="range" id="volumeInput" name="volumeInput" min="0" max="100" onchange="changeVolume()">
                       </div>
-                    </div>
-                    <!-- <iframe style="width: 100%; height: 400px;" [src]="videorecurs" frameborder="0" allowfullscreen></iframe> -->
+                    </div> -->
+                    <iframe style="width: 100%; height: 400px;" [src]="videorecurs" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div *ngIf="tipus == '4'">
                     <img [src]="canvas" alt="canvas" style="width: 100%;">

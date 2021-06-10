@@ -187,8 +187,8 @@ export class RecursosService {
   editRecurs(file) {
     let token = JSON.parse(localStorage.getItem('token'));
     var formData: any = new FormData();
-    formData.append("file", file.get('file').value);
     formData.append("id", file.get('id').value);
+    formData.append("file", file.get('file').value);
     formData.append("titol", file.get('titol').value);
     formData.append("descripcio", file.get('descripcio').value);
     formData.append("explicacio", file.get('explicacio').value);
@@ -208,11 +208,12 @@ export class RecursosService {
     let options = {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'})
     };
-    
+    console.log("service");
+    console.log(formData);
     this.http.put("http://localhost/DAW/M7_PHP/DAW2-Sintesi-Api-Salcedo/recursos", formData, options).subscribe(
       (body: any) => {
         localStorage.setItem('token', JSON.stringify(body.token));
-        this.router.navigate(['/admin/recursos']);
+        this.router.navigate(['/home']);
       }, (error: any) => {
         console.log(error);
         localStorage.setItem('token', JSON.stringify(error.error.token));

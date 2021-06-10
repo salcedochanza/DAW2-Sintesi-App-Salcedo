@@ -61,7 +61,7 @@
         <div *ngFor="let category of categories">
             <div class="card" (click)="getCategories(category.id)">
                 <div class="card-body">
-                    {{category.id}}: {{category.name | titlecase}}
+                    {{category.name | titlecase}}
                 </div>
             </div>
         </div>

@@ -9,11 +9,24 @@ var timeout;
 var time = 0;
 var i = false;
 
-function startVideo(video){
+function loadYoutubePlayer(videoUrl){
+    console.log(videoUrl);
     player = new YT.Player('player', {
         height: '360',
         width: '640',
-        videoId: video,
+        videoId: videoUrl,
+        events: {
+          'onReady': onPlayerReady,
+        }
+    });
+    console.log(player);
+}
+
+function startVideo(){
+    player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: this.videoId,
         events: {
           'onReady': onPlayerReady,
         }
